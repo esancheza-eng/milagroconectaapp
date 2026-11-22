@@ -2,1738 +2,762 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Milagro Conecta — Prototype</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0A2342">
+<meta name="description" content="Milagro Conecta: el directorio de negocios, profesionales y servicios de la ciudad de Milagro, Ecuador.">
+<title>Milagro Conecta — Todos los negocios de Milagro</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%231565C0'/%3E%3Cpath d='M16 6a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z' fill='%23fff'/%3E%3Ccircle cx='16' cy='13' r='2.6' fill='%23F5B63D'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 <style>
-:root {
-  --blue-900: #0A2342;
-  --blue-800: #0D3460;
-  --blue-700: #1565C0;
-  --blue-600: #1976D2;
-  --blue-500: #2196F3;
-  --blue-400: #42A5F5;
-  --blue-300: #90CAF9;
-  --blue-100: #E3F2FD;
-  --blue-50:  #F0F8FF;
-  --white:    #FFFFFF;
-  --gray-900: #0F172A;
-  --gray-700: #334155;
-  --gray-500: #64748B;
-  --gray-300: #CBD5E1;
-  --gray-100: #F1F5F9;
-  --gray-50:  #F8FAFC;
-  --green:    #16A34A;
-  --amber:    #D97706;
-  --red:      #DC2626;
-  --shadow-sm: 0 1px 3px rgba(10,35,66,.08), 0 1px 2px rgba(10,35,66,.06);
-  --shadow-md: 0 4px 16px rgba(10,35,66,.10);
-  --shadow-lg: 0 12px 40px rgba(10,35,66,.14);
-  --r-sm: 10px;
-  --r-md: 16px;
-  --r-lg: 24px;
+:root{
+  --ink:#0B1B33; --ink-2:#33445C; --ink-3:#6B7A90; --line:#E3E9F1; --bg:#F4F7FB; --card:#FFFFFF;
+  --navy:#0A2342; --blue:#1565C0; --blue-2:#1E88E5; --sky:#38A3F5; --sky-soft:#E6F2FD;
+  --gold:#F5B63D; --gold-soft:#FFF4D9; --coral:#FF6F4D; --green:#12A150; --green-soft:#E1F6EA; --red:#D93636; --red-soft:#FDE8E8;
+  --r-s:10px; --r-m:16px; --r-l:24px;
+  --sh-1:0 1px 2px rgba(10,35,66,.06),0 2px 8px rgba(10,35,66,.05);
+  --sh-2:0 8px 28px rgba(10,35,66,.12);
+  --nav-h:64px; --tab-h:64px;
 }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;padding-bottom:calc(var(--tab-h) + env(safe-area-inset-bottom));overflow-x:hidden}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+input,select,textarea{font-family:inherit;font-size:16px;color:inherit}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--sky);outline-offset:2px;border-radius:8px}
+.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 18px}
+.demo-ribbon{background:var(--gold-soft);color:#7A5400;font-size:12px;font-weight:600;text-align:center;padding:6px 12px}
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* header */
+header.top{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.88);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line)}
+.top-in{height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--blue),var(--sky));display:grid;place-items:center;box-shadow:0 4px 12px rgba(21,101,192,.35)}
+.logo-mark svg{width:22px;height:22px}
+.logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:19px;letter-spacing:-.4px;color:var(--navy)}
+.logo-text span{color:var(--blue-2)}
+.nav-d{display:none;gap:4px}
+.nav-d button{padding:9px 14px;border-radius:10px;font-weight:600;font-size:14px;color:var(--ink-2);display:flex;align-items:center;gap:7px;transition:.2s}
+.nav-d button:hover{background:var(--sky-soft);color:var(--blue)}
+.nav-d button.on{background:var(--blue);color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:12px;font-weight:700;font-size:15px;transition:transform .15s,box-shadow .2s,background .2s;white-space:nowrap}
+.btn:active{transform:scale(.97)}
+.btn-pri{background:var(--blue);color:#fff;box-shadow:0 6px 16px rgba(21,101,192,.3)}
+.btn-pri:hover{background:var(--blue-2)}
+.btn-gold{background:var(--gold);color:#3b2a00;box-shadow:0 6px 16px rgba(245,182,61,.4)}
+.btn-ghost{background:#fff;border:1.5px solid var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--sky)}
+.btn-sm{padding:8px 14px;font-size:13px;border-radius:10px}
+.btn-wa{background:#25D366;color:#053d1b}
+.btn-block{width:100%}
+.top-cta{display:none}
 
-body {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  background: var(--gray-50);
-  color: var(--gray-900);
-  min-height: 100vh;
-  overflow-x: hidden;
-}
+/* bottom tabs (mobile) */
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:60;height:calc(var(--tab-h) + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);background:rgba(255,255,255,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr)}
+nav.tabs button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:11px;font-weight:600;color:var(--ink-3);position:relative}
+nav.tabs button.on{color:var(--blue)}
+nav.tabs button.on::before{content:"";position:absolute;top:0;width:28px;height:3px;border-radius:0 0 4px 4px;background:var(--blue)}
 
-/* ── HEADER ── */
-header {
-  background: var(--blue-900);
-  padding: 0 40px;
-  height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  border-bottom: 1px solid rgba(255,255,255,.06);
-}
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
-.logo-icon {
-  width: 36px;
-  height: 36px;
-  background: var(--blue-600);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-}
-.logo-text {
-  font-family: 'Syne', sans-serif;
-  font-size: 18px;
-  font-weight: 800;
-  color: #fff;
-  letter-spacing: -.3px;
-}
-.logo-text span { color: var(--blue-400); }
-nav { display: flex; gap: 8px; align-items: center; }
-.nav-link {
-  color: rgba(255,255,255,.65);
-  font-size: 13px;
-  font-weight: 500;
-  padding: 6px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all .2s;
-  border: none; background: none;
-}
-.nav-link:hover { color: #fff; background: rgba(255,255,255,.08); }
-.nav-link.active { color: #fff; background: var(--blue-700); }
-.btn-primary {
-  background: var(--blue-500);
-  color: #fff;
-  border: none;
-  padding: 8px 18px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all .2s;
-  font-family: inherit;
-}
-.btn-primary:hover { background: var(--blue-400); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(33,150,243,.4); }
+/* screens */
+.screen{display:none;padding:20px 0 40px}
+.screen.on{display:block;animation:rise .35s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h1,h2,h3{letter-spacing:-.02em;line-height:1.15}
+.sec-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:30px 0 14px}
+.sec-head h2{font-size:22px;font-family:'Syne',sans-serif;color:var(--navy)}
+.sec-head p{color:var(--ink-3);font-size:14px}
 
-/* ── SCREENS TABS ── */
-.tabs-bar {
-  display: flex;
-  gap: 4px;
-  padding: 16px 40px 0;
-  background: var(--blue-900);
-  border-bottom: 1px solid rgba(255,255,255,.06);
-}
-.tab {
-  padding: 8px 20px;
-  font-size: 12px;
-  font-weight: 600;
-  color: rgba(255,255,255,.5);
-  border-radius: 8px 8px 0 0;
-  cursor: pointer;
-  transition: all .2s;
-  border: none;
-  background: rgba(255,255,255,.05);
-  font-family: inherit;
-  letter-spacing: .3px;
-}
-.tab.active {
-  background: var(--gray-50);
-  color: var(--blue-700);
-}
-.tab:hover:not(.active) { color: rgba(255,255,255,.8); }
+/* hero */
+.hero{position:relative;border-radius:var(--r-l);overflow:hidden;padding:30px 22px 26px;color:#fff;background:radial-gradient(120% 90% at 100% 0%,#2A7FDB 0%,transparent 55%),radial-gradient(90% 80% at 0% 100%,#0D3F7C 0%,transparent 60%),var(--navy)}
+.hero::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.14) 1px,transparent 1.4px);background-size:22px 22px;mask-image:linear-gradient(120deg,transparent 20%,#000 90%);-webkit-mask-image:linear-gradient(120deg,transparent 20%,#000 90%);pointer-events:none}
+.hero>*{position:relative;z-index:1}
+.pill{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.14);font-size:12px;font-weight:700;border:1px solid rgba(255,255,255,.2)}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(30px,8vw,52px);margin:14px 0 12px;font-weight:800}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero p{max-width:520px;color:rgba(255,255,255,.82);font-size:15.5px}
+.searchbar{margin-top:22px;background:#fff;border-radius:16px;padding:7px;display:flex;flex-direction:column;gap:6px;box-shadow:var(--sh-2);max-width:680px}
+.s-field{display:flex;align-items:center;gap:10px;padding:8px 12px;color:var(--ink-3)}
+.s-field input{border:0;outline:0;flex:1;min-width:0;background:none;color:var(--ink)}
+.s-field input::placeholder{color:#8a97aa}
+.hero-trust{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:18px;font-size:13px;color:rgba(255,255,255,.85)}
+.hero-trust span{display:flex;align-items:center;gap:6px}
+.hero-trust svg{color:var(--gold)}
 
-/* ── MAIN CONTENT ── */
-main { padding: 32px 40px; min-height: calc(100vh - 120px); }
-.screen { display: none; animation: fadeUp .3s ease; }
-.screen.active { display: block; }
-@keyframes fadeUp { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform: translateY(0); } }
+/* categories */
+.cats{display:flex;gap:10px;overflow-x:auto;padding:4px 18px 10px;margin:0 -18px;scroll-snap-type:x proximity;scroll-padding-left:18px;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.cat{scroll-snap-align:start;flex:none;display:flex;align-items:center;gap:8px;padding:11px 16px;border-radius:14px;background:var(--card);border:1.5px solid var(--line);font-weight:600;font-size:14px;transition:.2s}
+.cat .e{font-size:19px}
+.cat:hover{border-color:var(--sky)}
+.cat.on{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 6px 16px rgba(21,101,192,.28)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{padding:8px 14px;border-radius:999px;background:#fff;border:1.5px solid var(--line);font-size:13px;font-weight:600;color:var(--ink-2);transition:.2s}
+.chip.on{background:var(--navy);border-color:var(--navy);color:#fff}
 
-/* ── HERO (Home Screen) ── */
-.hero {
-  background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-800) 50%, var(--blue-700) 100%);
-  border-radius: var(--r-lg);
-  padding: 48px 48px 0;
-  margin-bottom: 28px;
-  overflow: hidden;
-  position: relative;
-  min-height: 240px;
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  top: -60px; right: -60px;
-  width: 280px; height: 280px;
-  background: radial-gradient(circle, rgba(33,150,243,.3) 0%, transparent 70%);
-  border-radius: 50%;
-}
-.hero::after {
-  content: '';
-  position: absolute;
-  bottom: -40px; left: 30%;
-  width: 200px; height: 200px;
-  background: radial-gradient(circle, rgba(66,165,245,.15) 0%, transparent 70%);
-  border-radius: 50%;
-}
-.hero-content { position: relative; z-index: 1; }
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(255,255,255,.12);
-  border: 1px solid rgba(255,255,255,.18);
-  color: var(--blue-300);
-  font-size: 11px;
-  font-weight: 600;
-  padding: 4px 12px;
-  border-radius: 20px;
-  margin-bottom: 16px;
-  letter-spacing: .5px;
-  text-transform: uppercase;
-}
-.hero h1 {
-  font-family: 'Syne', sans-serif;
-  font-size: 42px;
-  font-weight: 800;
-  color: #fff;
-  line-height: 1.1;
-  letter-spacing: -1px;
-  margin-bottom: 12px;
-}
-.hero h1 span { color: var(--blue-400); }
-.hero p {
-  color: rgba(255,255,255,.7);
-  font-size: 15px;
-  max-width: 420px;
-  line-height: 1.6;
-  margin-bottom: 28px;
-}
-.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-.btn-hero {
-  padding: 12px 24px;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all .2s;
-  font-family: inherit;
-  border: none;
-}
-.btn-hero-main { background: var(--blue-500); color: #fff; }
-.btn-hero-main:hover { background: var(--blue-400); box-shadow: 0 6px 20px rgba(33,150,243,.5); }
-.btn-hero-outline { background: rgba(255,255,255,.1); color: #fff; border: 1px solid rgba(255,255,255,.25); }
-.btn-hero-outline:hover { background: rgba(255,255,255,.18); }
+/* cards */
+.grid{display:grid;gap:16px;grid-template-columns:1fr}
+.card{background:var(--card);border-radius:var(--r-m);box-shadow:var(--sh-1);overflow:hidden;cursor:pointer;display:flex;flex-direction:column;border:1px solid transparent;transition:transform .2s,box-shadow .2s,border-color .2s}
+.card:hover{transform:translateY(-3px);box-shadow:var(--sh-2);border-color:var(--sky-soft)}
+.card-media{height:128px;display:grid;place-items:center;font-size:54px;position:relative}
+.badges{position:absolute;left:12px;top:12px;display:flex;gap:6px;flex-wrap:wrap}
+.badge{font-size:11px;font-weight:800;padding:4px 9px;border-radius:999px;background:#fff;color:var(--ink);letter-spacing:.2px}
+.badge.prem{background:var(--gold);color:#3b2a00}
+.badge.new{background:var(--coral);color:#fff}
+.status{position:absolute;right:12px;top:12px;font-size:11px;font-weight:700;padding:4px 9px;border-radius:999px;background:var(--green-soft);color:var(--green);display:flex;align-items:center;gap:5px}
+.status::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.status.off{background:#EEF1F5;color:var(--ink-3)}
+.card-body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:7px;flex:1}
+.kicker{font-size:12px;font-weight:700;color:var(--blue-2);text-transform:uppercase;letter-spacing:.6px}
+.card h3{font-size:18px;color:var(--navy)}
+.card p{font-size:14px;color:var(--ink-2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.meta{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--ink-3);font-weight:600;margin-top:auto;padding-top:4px}
+.meta .rate{color:var(--ink);display:flex;align-items:center;gap:4px}
+.meta .rate svg{fill:var(--gold);stroke:var(--gold);width:16px;height:16px}
+.card-actions{display:flex;gap:8px;margin-top:8px}
+.card-actions .btn{flex:1}
+.empty{grid-column:1/-1;text-align:center;background:#fff;border:2px dashed var(--line);border-radius:var(--r-m);padding:34px 20px;color:var(--ink-2)}
+.empty b{display:block;font-size:18px;margin:6px 0 4px;color:var(--navy)}
 
-.hero-stats {
-  display: flex;
-  gap: 32px;
-  margin-top: 36px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(255,255,255,.1);
-  padding-bottom: 28px;
-}
-.hero-stat { color: #fff; }
-.hero-stat-num { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 28px; font-weight: 800; color: var(--blue-400); font-variant-numeric: tabular-nums; letter-spacing: -0.5px; }
-.hero-stat-label { font-size: 11px; color: rgba(255,255,255,.55); margin-top: 2px; text-transform: uppercase; letter-spacing: .5px; }
+/* how */
+.steps{display:grid;gap:14px}
+.step{background:#fff;border-radius:var(--r-m);padding:20px;box-shadow:var(--sh-1);display:flex;gap:14px}
+.step .n{flex:none;width:40px;height:40px;border-radius:12px;background:var(--sky-soft);color:var(--blue);display:grid;place-items:center;font-family:'Syne',sans-serif;font-weight:800;font-size:18px}
+.step h3{font-size:16px;margin-bottom:3px;color:var(--navy)}
+.step p{font-size:14px;color:var(--ink-2)}
 
-/* ── SEARCH BAR ── */
-.search-section { margin-bottom: 28px; }
-.search-wrap {
-  background: var(--white);
-  border-radius: var(--r-md);
-  padding: 8px;
-  display: flex;
-  gap: 8px;
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--gray-100);
-}
-.search-input-wrap {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 0 12px;
-}
-.search-icon { color: var(--gray-500); font-size: 16px; }
-.search-input {
-  flex: 1;
-  border: none;
-  outline: none;
-  font-size: 14px;
-  font-family: inherit;
-  color: var(--gray-900);
-  background: transparent;
-}
-.search-input::placeholder { color: var(--gray-300); }
-.search-divider { width: 1px; background: var(--gray-100); margin: 6px 0; }
-.location-btn {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 0 16px;
-  font-size: 13px;
-  color: var(--blue-700);
-  font-weight: 500;
-  cursor: pointer;
-  white-space: nowrap;
-  font-family: inherit;
-  background: none; border: none;
-}
-.btn-search {
-  background: var(--blue-700);
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  padding: 10px 22px;
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all .2s;
-  font-family: inherit;
-  white-space: nowrap;
-}
-.btn-search:hover { background: var(--blue-600); }
+/* owners CTA */
+.owners{margin-top:34px;border-radius:var(--r-l);padding:26px 22px;background:linear-gradient(135deg,#0A2342,#12468A);color:#fff;display:grid;gap:18px}
+.owners h2{font-family:'Syne',sans-serif;font-size:25px}
+.owners p{color:rgba(255,255,255,.82);font-size:15px;margin-top:6px}
+.owner-plans{display:grid;gap:10px}
+.mini-plan{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.mini-plan b{font-size:15px}
+.mini-plan span{font-size:13px;color:rgba(255,255,255,.75);display:block}
+.mini-plan .pr{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--gold);white-space:nowrap}
 
-/* ── CATEGORIES ── */
-.section-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-}
-.section-title { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--gray-900); }
-.section-link { font-size: 12px; font-weight: 600; color: var(--blue-700); cursor: pointer; text-decoration: none; }
+/* map */
+.map-layout{display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+.map{position:relative;height:380px;border-radius:var(--r-l);overflow:hidden;background:#E9F1EA;box-shadow:var(--sh-1);border:1px solid var(--line)}
+.map .block{position:absolute;background:#DDE8DF;border-radius:10px}
+.map .park{position:absolute;background:#CDE7CF;border-radius:50%}
+.map .road{position:absolute;background:#fff;box-shadow:0 0 0 2px #F0F4F1}
+.map .rl{position:absolute;font-size:10px;font-weight:800;letter-spacing:1.5px;color:#7C8A9C;text-transform:uppercase;white-space:nowrap}
+.pin{position:absolute;transform:translate(-50%,-100%);display:grid;place-items:center;transition:transform .2s;z-index:2}
+.pin .bub{width:42px;height:42px;border-radius:50% 50% 50% 4px;transform:rotate(-45deg);background:var(--blue);display:grid;place-items:center;box-shadow:0 6px 14px rgba(10,35,66,.3);border:3px solid #fff}
+.pin .bub i{transform:rotate(45deg);font-style:normal;font-size:18px}
+.pin:hover,.pin.on{transform:translate(-50%,-100%) scale(1.15);z-index:5}
+.pin.on .bub{background:var(--coral)}
+.map-pop{position:absolute;left:12px;right:12px;bottom:12px;z-index:6;background:#fff;border-radius:16px;box-shadow:var(--sh-2);padding:12px 14px;display:none;align-items:center;gap:12px}
+.map-pop.on{display:flex}
+.map-pop .em{font-size:30px}
+.map-pop .tx{flex:1;min-width:0}
+.map-pop b{display:block;font-size:15px;color:var(--navy)}
+.map-pop small{color:var(--ink-3);font-weight:600}
+.list-item{display:flex;align-items:center;gap:12px;background:#fff;border-radius:14px;padding:12px;box-shadow:var(--sh-1);cursor:pointer;border:1.5px solid transparent;width:100%;text-align:left}
+.list-item:hover,.list-item.on{border-color:var(--sky)}
+.list-item .em{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-size:24px;flex:none}
+.list-item b{display:block;font-size:15px;color:var(--navy)}
+.list-item small{color:var(--ink-3);font-weight:600;font-size:12.5px}
+.list-col{display:grid;gap:10px;align-content:start;max-height:460px;overflow:auto;padding:2px}
 
-.cats-grid {
-  display: grid;
-  grid-template-columns: repeat(9, 1fr);
-  gap: 12px;
-  margin-bottom: 32px;
-}
-.cat-card {
-  background: var(--white);
-  border-radius: var(--r-md);
-  padding: 18px 10px;
-  text-align: center;
-  cursor: pointer;
-  transition: all .25s;
-  border: 1.5px solid transparent;
-  box-shadow: var(--shadow-sm);
-}
-.cat-card:hover {
-  border-color: var(--blue-300);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
-}
-.cat-card.active {
-  border-color: var(--blue-600);
-  background: var(--blue-50);
-}
-.cat-icon { font-size: 26px; margin-bottom: 8px; display: block; }
-.cat-name { font-size: 10px; font-weight: 700; color: var(--gray-700); text-transform: uppercase; letter-spacing: .4px; }
-.cat-count { font-size: 10px; color: var(--gray-500); margin-top: 2px; }
+/* profile */
+.back{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:14px;color:var(--blue);margin-bottom:12px}
+.p-hero{border-radius:var(--r-l);overflow:hidden;background:#fff;box-shadow:var(--sh-1)}
+.p-cover{height:150px;display:grid;place-items:center;font-size:76px;position:relative}
+.p-head{padding:18px 20px 20px}
+.p-head h1{font-family:'Syne',sans-serif;font-size:27px;color:var(--navy);margin:6px 0}
+.p-meta{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13.5px;color:var(--ink-2);font-weight:600}
+.p-meta span{display:flex;align-items:center;gap:6px}
+.p-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.p-grid{display:grid;gap:16px;margin-top:16px;grid-template-columns:minmax(0,1fr)}
+.box{background:#fff;border-radius:var(--r-m);box-shadow:var(--sh-1);padding:20px}
+.box h3{font-size:16px;margin-bottom:12px;color:var(--navy);display:flex;align-items:center;gap:8px}
+.box p{color:var(--ink-2);font-size:15px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{padding:6px 12px;border-radius:999px;background:var(--sky-soft);color:var(--blue);font-size:13px;font-weight:700}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.gallery div{aspect-ratio:1;border-radius:12px;display:grid;place-items:center;font-size:34px;background:var(--sky-soft)}
+.rev-sum{display:flex;gap:18px;align-items:center;margin-bottom:14px}
+.rev-sum .big{font-family:'Syne',sans-serif;font-size:44px;font-weight:800;color:var(--navy);line-height:1}
+.bars{flex:1;display:grid;gap:5px}
+.bar{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-3);font-weight:700}
+.bar i{flex:1;height:7px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar i b{display:block;height:100%;background:var(--gold);border-radius:99px}
+.rev{padding:14px 0;border-top:1px solid var(--line)}
+.rev .who{display:flex;align-items:center;gap:10px;margin-bottom:6px;font-weight:700;font-size:14px}
+.rev .av{width:34px;height:34px;border-radius:50%;background:var(--sky-soft);display:grid;place-items:center}
+.rev small{color:var(--ink-3);font-weight:600}
+.stars{color:var(--gold);letter-spacing:1px}
+.hours{width:100%;border-collapse:collapse;font-size:14px}
+.hours td{padding:7px 0;border-bottom:1px dashed var(--line);color:var(--ink-2)}
+.hours td:last-child{text-align:right;font-weight:700;color:var(--ink)}
+.contact-row{display:flex;gap:10px;align-items:center;padding:8px 0;font-size:14px;color:var(--ink-2)}
+.promo{background:linear-gradient(135deg,var(--gold-soft),#FFE7B0);border-radius:var(--r-m);padding:18px 20px;color:#5a3d00}
+.promo .off{font-family:'Syne',sans-serif;font-size:34px;font-weight:800;line-height:1;color:#3b2a00}
 
-/* ── FILTERS ROW ── */
-.filters-row {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-}
-.filter-chip {
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  border: 1.5px solid var(--gray-200, #E2E8F0);
-  background: var(--white);
-  color: var(--gray-700);
-  transition: all .18s;
-  font-family: inherit;
-}
-.filter-chip:hover { border-color: var(--blue-400); color: var(--blue-700); }
-.filter-chip.active { background: var(--blue-700); color: #fff; border-color: var(--blue-700); }
+/* form */
+.form-grid{display:grid;gap:16px}
+.field label{display:block;font-size:13px;font-weight:700;color:var(--ink-2);margin-bottom:6px}
+.field label i{color:var(--coral);font-style:normal}
+.field input,.field select,.field textarea{width:100%;padding:13px 14px;border-radius:12px;border:1.5px solid var(--line);background:#fff;transition:.2s;outline:0}
+.field textarea{min-height:104px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--sky);box-shadow:0 0 0 4px rgba(56,163,245,.18)}
+.field.err input,.field.err select,.field.err textarea{border-color:var(--red);background:var(--red-soft)}
+.field .msg{display:none;color:var(--red);font-size:12.5px;font-weight:600;margin-top:5px}
+.field.err .msg{display:block}
+.two{display:grid;gap:16px}
+.drop{border:2px dashed #B8C8DC;border-radius:14px;padding:22px;text-align:center;color:var(--ink-3);font-size:14px;cursor:pointer;background:#FAFCFF;transition:.2s}
+.drop:hover,.drop.over{border-color:var(--blue-2);background:var(--sky-soft)}
+.drop b{display:block;color:var(--ink);margin-top:4px}
+.plans{display:grid;gap:12px}
+.plan{position:relative;display:block;cursor:pointer}
+.plan input{position:absolute;opacity:0}
+.plan-in{border:2px solid var(--line);border-radius:16px;padding:16px;background:#fff;transition:.2s;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.plan input:checked+.plan-in{border-color:var(--blue);background:var(--sky-soft);box-shadow:0 0 0 4px rgba(21,101,192,.12)}
+.plan input:focus-visible+.plan-in{outline:3px solid var(--sky);outline-offset:2px}
+.plan b{font-size:16px;color:var(--navy);display:block}
+.plan small{color:var(--ink-3);font-weight:600}
+.plan .pr{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:var(--blue);white-space:nowrap}
+.plan .rib{position:absolute;top:-10px;right:14px;background:var(--gold);color:#3b2a00;font-size:11px;font-weight:800;padding:3px 10px;border-radius:99px}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--ink-2)}
+.check input{width:20px;height:20px;margin-top:2px;accent-color:var(--blue)}
+.progress{height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin:6px 0 20px}
+.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--sky));border-radius:99px;transition:width .3s}
+.ok-card{text-align:center;padding:36px 22px}
+.ok-card .big{width:76px;height:76px;border-radius:50%;background:var(--green-soft);color:var(--green);display:grid;place-items:center;margin:0 auto 14px}
+.ok-card .big svg{width:38px;height:38px;stroke-width:2.6}
+.benefit{display:flex;gap:10px;font-size:14px;color:var(--ink-2);padding:6px 0}
+.benefit svg{color:var(--green);margin-top:2px}
+.side-stack{display:grid;gap:16px;align-content:start}
 
-/* ── BUSINESS CARDS ── */
-.biz-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 20px;
-  margin-bottom: 32px;
-}
-.biz-card {
-  background: var(--white);
-  border-radius: var(--r-md);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--gray-100);
-  cursor: pointer;
-  transition: all .25s;
-}
-.biz-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-.biz-card { cursor: pointer; }
-.biz-card-img {
-  height: 140px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 52px;
-  position: relative;
-  overflow: hidden;
-}
-.biz-card-badge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: var(--amber);
-  color: #fff;
-  font-size: 9px;
-  font-weight: 800;
-  padding: 3px 8px;
-  border-radius: 6px;
-  letter-spacing: .5px;
-  text-transform: uppercase;
-}
-.biz-card-open {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: var(--green);
-  color: #fff;
-  font-size: 9px;
-  font-weight: 700;
-  padding: 3px 8px;
-  border-radius: 6px;
-}
-.biz-card-body { padding: 14px 16px; }
-.biz-card-cat { font-size: 10px; font-weight: 700; color: var(--blue-600); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
-.biz-card-name { font-size: 15px; font-weight: 700; color: var(--gray-900); margin-bottom: 4px; }
-.biz-card-desc { font-size: 12px; color: var(--gray-500); line-height: 1.5; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.biz-card-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 10px;
-  border-top: 1px solid var(--gray-100);
-}
-.biz-rating { display: flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: var(--gray-700); }
-.stars-text { color: #F59E0B; }
-.biz-dist { font-size: 11px; color: var(--gray-500); display: flex; align-items: center; gap: 3px; }
-.biz-actions { display: flex; gap: 6px; }
-.biz-action-btn {
-  width: 30px; height: 30px;
-  border-radius: 8px;
-  border: 1px solid var(--gray-100);
-  background: var(--gray-50);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all .2s;
-}
-.biz-action-btn:hover { background: var(--blue-50); border-color: var(--blue-300); }
+/* admin */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stat{background:#fff;border-radius:var(--r-m);padding:16px;box-shadow:var(--sh-1)}
+.stat .lb{font-size:12.5px;color:var(--ink-3);font-weight:700}
+.stat .vl{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--navy);margin:2px 0}
+.stat .dl{font-size:12px;font-weight:700;color:var(--green)}
+.stat .dl.warn{color:#B45F00}
+.tbl-wrap{overflow-x:auto;margin:0 -4px}
+table.t{width:100%;border-collapse:collapse;min-width:560px;font-size:14px}
+table.t th{text-align:left;font-size:12px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.5px;padding:10px 8px;border-bottom:1.5px solid var(--line)}
+table.t td{padding:12px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+.st{font-size:12px;font-weight:700;padding:4px 10px;border-radius:99px;display:inline-block}
+.st.pen{background:var(--gold-soft);color:#8A5A00}
+.st.act{background:var(--green-soft);color:var(--green)}
+.row-act{display:flex;gap:6px}
+.chart{display:flex;align-items:flex-end;gap:8px;height:150px;padding-top:10px}
+.chart div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:6px;height:100%;font-size:12px;font-weight:700;color:var(--ink-3)}
+.chart i{display:block;width:100%;border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,var(--sky),var(--blue));min-height:6px}
+.chart div.peak i{background:linear-gradient(180deg,var(--gold),var(--coral))}
+.hbar{margin:10px 0}
+.hbar .r{display:flex;justify-content:space-between;font-size:13.5px;font-weight:600;color:var(--ink-2);margin-bottom:4px}
+.hbar i{display:block;height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.hbar i b{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--sky));border-radius:99px}
+.adm-grid{display:grid;gap:16px;margin-top:16px;grid-template-columns:minmax(0,1fr)}
+.adm-grid>*,.p-grid>*,.reg-layout>*,.map-layout>*{min-width:0}
 
-/* ── MAP SCREEN ── */
-.map-layout { display: grid; grid-template-columns: 340px 1fr; gap: 20px; height: 600px; }
-.map-sidebar {
-  background: var(--white);
-  border-radius: var(--r-md);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--gray-100);
-  display: flex;
-  flex-direction: column;
-}
-.map-sidebar-header { padding: 16px; border-bottom: 1px solid var(--gray-100); }
-.sidebar-search {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--gray-50);
-  border: 1px solid var(--gray-100);
-  border-radius: 10px;
-  padding: 8px 12px;
-  margin-bottom: 10px;
-}
-.sidebar-search input { flex:1; border:none; outline:none; font-size:13px; background:transparent; font-family:inherit; color: var(--gray-900); }
-.sidebar-search input::placeholder { color: var(--gray-300); }
-.map-filters { display: flex; gap: 6px; flex-wrap: wrap; }
-.map-filter {
-  font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 12px;
-  border: 1.5px solid var(--gray-200, #E2E8F0); background: var(--white);
-  color: var(--gray-700); cursor: pointer; transition: all .18s; font-family: inherit;
-}
-.map-filter.active { background: var(--blue-700); color: #fff; border-color: var(--blue-700); }
-.map-results { flex: 1; overflow-y: auto; }
-.map-result-item {
-  display: flex; gap: 12px; padding: 14px 16px;
-  border-bottom: 1px solid var(--gray-50);
-  cursor: pointer; transition: background .18s;
-}
-.map-result-item:hover { background: var(--blue-50); }
-.map-result-icon {
-  width: 42px; height: 42px; border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 20px; flex-shrink: 0;
-}
-.map-result-info { flex: 1; min-width: 0; }
-.map-result-name { font-size: 13px; font-weight: 700; color: var(--gray-900); }
-.map-result-cat { font-size: 11px; color: var(--gray-500); margin-top: 1px; }
-.map-result-meta { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
-.map-result-dist { font-size: 10px; color: var(--blue-600); font-weight: 600; background: var(--blue-50); padding: 2px 7px; border-radius: 6px; }
-.map-result-rating { font-size: 10px; color: var(--gray-500); }
+/* footer + toast */
+footer{margin-top:20px;padding:26px 0 8px;text-align:center;font-size:13px;color:var(--ink-3)}
+footer strong{color:var(--ink-2)}
+.toast{position:fixed;left:50%;bottom:calc(var(--tab-h) + 18px + env(safe-area-inset-bottom));transform:translate(-50%,20px);background:var(--navy);color:#fff;padding:12px 18px;border-radius:14px;font-size:14px;font-weight:600;box-shadow:var(--sh-2);opacity:0;pointer-events:none;transition:.3s;z-index:100;max-width:calc(100vw - 32px);text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
 
-.map-view {
-  background: var(--blue-50);
-  border-radius: var(--r-md);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--gray-100);
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+@media(min-width:640px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .searchbar{flex-direction:row;align-items:center}
+  .s-field.grow{flex:1}
+  .s-sep{width:1px;height:26px;background:var(--line)}
+  .two{grid-template-columns:1fr 1fr}
+  .stats{grid-template-columns:repeat(4,1fr)}
+  .steps{grid-template-columns:repeat(3,1fr)}
+  .step{flex-direction:column}
+  .owner-plans{grid-template-columns:repeat(3,1fr)}
+  .owner-plans .mini-plan{flex-direction:column;align-items:flex-start}
+  .plans{grid-template-columns:1fr 1fr}
 }
-.map-placeholder {
-  width: 100%; height: 100%;
-  position: relative;
-  overflow: hidden;
+@media(min-width:960px){
+  body{padding-bottom:0}
+  nav.tabs{display:none}
+  .nav-d{display:flex}
+  .top-cta{display:inline-flex}
+  .toast{bottom:28px}
+  .grid{grid-template-columns:repeat(3,1fr)}
+  .hero{padding:54px 52px 46px}
+  .owners{grid-template-columns:1.1fr 1.4fr;align-items:center;padding:38px 42px}
+  .map-layout{grid-template-columns:minmax(0,1.7fr) minmax(0,1fr)}
+  .map{height:540px}
+  .list-col{max-height:540px}
+  .p-grid{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)}
+  .reg-layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:20px;align-items:start}
+  .adm-grid{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}
+  .p-cover{height:190px;font-size:96px}
 }
-.map-bg-svg { width: 100%; height: 100%; position: absolute; inset: 0; }
-.map-controls {
-  position: absolute;
-  top: 16px; right: 16px;
-  display: flex; flex-direction: column; gap: 8px;
-}
-.map-ctrl-btn {
-  width: 36px; height: 36px;
-  background: var(--white);
-  border-radius: 8px;
-  border: 1px solid var(--gray-200, #E2E8F0);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 16px; cursor: pointer; box-shadow: var(--shadow-sm);
-}
-.map-pin-el {
-  position: absolute;
-  width: 36px; height: 36px;
-  border-radius: 50% 50% 50% 0;
-  transform: rotate(-45deg);
-  display: flex; align-items: center; justify-content: center;
-  border: 3px solid #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,.25);
-  cursor: pointer;
-  transition: transform .2s;
-}
-.map-pin-el:hover { transform: rotate(-45deg) scale(1.2); }
-.map-pin-el span { transform: rotate(45deg); font-size: 14px; }
-.map-legend {
-  position: absolute;
-  bottom: 16px; left: 16px;
-  background: var(--white);
-  border-radius: 10px;
-  padding: 10px 14px;
-  box-shadow: var(--shadow-md);
-  font-size: 11px;
-  color: var(--gray-700);
-}
-.map-legend-title { font-weight: 700; margin-bottom: 6px; font-size: 10px; text-transform: uppercase; letter-spacing: .5px; color: var(--gray-500); }
-.legend-item { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; font-size: 11px; }
-.legend-dot { width: 10px; height: 10px; border-radius: 50%; }
-
-/* ── REGISTER SCREEN ── */
-.register-layout {
-  display: grid;
-  grid-template-columns: 1fr 420px;
-  gap: 28px;
-  align-items: start;
-}
-.register-form-card {
-  background: var(--white);
-  border-radius: var(--r-lg);
-  padding: 36px;
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--gray-100);
-}
-.form-title { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; margin-bottom: 4px; }
-.form-subtitle { color: var(--gray-500); font-size: 13px; margin-bottom: 28px; }
-.form-steps {
-  display: flex; gap: 0; margin-bottom: 28px;
-  border-radius: 12px; overflow: hidden; border: 1px solid var(--gray-100);
-}
-.form-step {
-  flex: 1; padding: 10px 8px; text-align: center;
-  font-size: 11px; font-weight: 700; color: var(--gray-500);
-  background: var(--gray-50); border-right: 1px solid var(--gray-100);
-  text-transform: uppercase; letter-spacing: .4px;
-}
-.form-step:last-child { border-right: none; }
-.form-step.active { background: var(--blue-700); color: #fff; }
-.form-step.done { background: var(--blue-50); color: var(--blue-700); }
-.form-group { margin-bottom: 18px; }
-.form-label { font-size: 12px; font-weight: 700; color: var(--gray-700); margin-bottom: 6px; display: block; text-transform: uppercase; letter-spacing: .4px; }
-.form-input {
-  width: 100%; padding: 11px 14px;
-  border: 1.5px solid var(--gray-200, #E2E8F0);
-  border-radius: 10px;
-  font-size: 14px;
-  font-family: inherit;
-  color: var(--gray-900);
-  transition: border-color .2s;
-  background: var(--white);
-  outline: none;
-}
-.form-input:focus { border-color: var(--blue-500); box-shadow: 0 0 0 3px rgba(33,150,243,.12); }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.form-select {
-  width: 100%; padding: 11px 14px;
-  border: 1.5px solid var(--gray-200, #E2E8F0);
-  border-radius: 10px;
-  font-size: 14px;
-  font-family: inherit;
-  color: var(--gray-900);
-  background: var(--white);
-  outline: none;
-  cursor: pointer;
-}
-.photo-upload {
-  border: 2px dashed var(--gray-200, #E2E8F0);
-  border-radius: 12px;
-  padding: 28px;
-  text-align: center;
-  cursor: pointer;
-  transition: all .2s;
-}
-.photo-upload:hover { border-color: var(--blue-400); background: var(--blue-50); }
-.photo-upload-icon { font-size: 28px; margin-bottom: 8px; }
-.photo-upload-text { font-size: 13px; color: var(--gray-500); }
-.photo-upload-text strong { color: var(--blue-700); }
-.form-check { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; color: var(--gray-700); }
-.form-check input { margin-top: 2px; accent-color: var(--blue-700); }
-.btn-form {
-  width: 100%; padding: 13px;
-  background: var(--blue-700); color: #fff;
-  border: none; border-radius: 12px;
-  font-size: 15px; font-weight: 700;
-  cursor: pointer; transition: all .2s;
-  font-family: inherit; margin-top: 8px;
-}
-.btn-form:hover { background: var(--blue-600); box-shadow: 0 6px 20px rgba(21,101,192,.35); }
-.register-sidebar { display: flex; flex-direction: column; gap: 16px; }
-.info-card {
-  background: var(--white);
-  border-radius: var(--r-md);
-  padding: 22px;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--gray-100);
-}
-.info-card-title { font-weight: 700; font-size: 14px; margin-bottom: 14px; }
-.plan-comparison { display: flex; flex-direction: column; gap: 10px; }
-.plan-row {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 12px 14px; border-radius: 10px; border: 1.5px solid var(--gray-100);
-}
-.plan-row.featured { border-color: var(--blue-500); background: var(--blue-50); }
-.plan-row-name { font-size: 13px; font-weight: 700; }
-.plan-row-price { font-size: 14px; font-weight: 800; color: var(--blue-700); }
-.plan-row-free { font-size: 14px; font-weight: 800; color: var(--green); }
-
-/* ── ADMIN SCREEN ── */
-.admin-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 24px; }
-.stat-card {
-  background: var(--white);
-  border-radius: var(--r-md);
-  padding: 22px 24px;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--gray-100);
-}
-.stat-card-icon { font-size: 24px; margin-bottom: 12px; }
-.stat-card-num { font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 800; color: var(--gray-900); }
-.stat-card-label { font-size: 12px; color: var(--gray-500); margin-top: 4px; text-transform: uppercase; letter-spacing: .5px; }
-.stat-card-change { font-size: 11px; color: var(--green); font-weight: 700; margin-top: 6px; }
-
-.admin-layout { display: grid; grid-template-columns: 1fr 340px; gap: 20px; }
-.admin-table-card {
-  background: var(--white);
-  border-radius: var(--r-md);
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--gray-100);
-  overflow: hidden;
-}
-.admin-table-header {
-  padding: 18px 24px;
-  border-bottom: 1px solid var(--gray-100);
-  display: flex; align-items: center; justify-content: space-between;
-}
-.admin-table-title { font-size: 15px; font-weight: 700; }
-.badge-pending {
-  background: #FEF3C7; color: #92400E;
-  font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px;
-}
-table { width: 100%; border-collapse: collapse; }
-th { font-size: 10px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: .5px; padding: 10px 24px; text-align: left; background: var(--gray-50); border-bottom: 1px solid var(--gray-100); }
-td { padding: 14px 24px; font-size: 13px; border-bottom: 1px solid var(--gray-50); color: var(--gray-700); }
-tr:last-child td { border-bottom: none; }
-tr:hover td { background: var(--gray-50); }
-.status-chip {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 20px;
-  font-size: 10px;
-  font-weight: 700;
-}
-.status-pending { background: #FEF3C7; color: #92400E; }
-.status-active { background: #DCFCE7; color: #166534; }
-.status-featured { background: #EDE9FE; color: #4C1D95; }
-.action-btns-table { display: flex; gap: 6px; }
-.btn-approve {
-  background: var(--green); color: #fff; border: none;
-  padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: 700;
-  cursor: pointer; font-family: inherit; transition: all .2s;
-}
-.btn-approve:hover { opacity: .85; }
-.btn-reject {
-  background: #FEF2F2; color: var(--red); border: 1px solid #FEE2E2;
-  padding: 5px 10px; border-radius: 6px; font-size: 11px; font-weight: 700;
-  cursor: pointer; font-family: inherit;
-}
-
-.admin-sidebar-col { display: flex; flex-direction: column; gap: 16px; }
-.chart-card {
-  background: var(--white);
-  border-radius: var(--r-md);
-  padding: 20px;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--gray-100);
-}
-.chart-card-title { font-size: 13px; font-weight: 700; margin-bottom: 14px; }
-.bar-chart { display: flex; align-items: flex-end; gap: 8px; height: 100px; }
-.bar-item { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
-.bar { width: 100%; border-radius: 6px 6px 0 0; background: var(--blue-100); transition: all .3s; min-width: 20px; }
-.bar:hover { background: var(--blue-500); }
-.bar-label { font-size: 9px; color: var(--gray-500); }
-.top-cats { display: flex; flex-direction: column; gap: 10px; }
-.top-cat-row { display: flex; align-items: center; gap: 10px; }
-.top-cat-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; background: var(--blue-50); }
-.top-cat-name { flex: 1; font-size: 12px; font-weight: 600; color: var(--gray-700); }
-.top-cat-bar-wrap { width: 80px; height: 6px; background: var(--gray-100); border-radius: 3px; overflow: hidden; }
-.top-cat-bar { height: 100%; border-radius: 3px; background: var(--blue-500); }
-.top-cat-num { font-size: 11px; font-weight: 700; color: var(--gray-700); min-width: 24px; text-align: right; }
-
-/* ── BUSINESS PROFILE SCREEN ── */
-.profile-hero {
-  background: linear-gradient(135deg, var(--blue-800), var(--blue-600));
-  border-radius: var(--r-lg);
-  padding: 36px 40px;
-  margin-bottom: 24px;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  gap: 28px;
-}
-.profile-hero::after {
-  content: '';
-  position: absolute;
-  top: -30px; right: -30px;
-  width: 180px; height: 180px;
-  background: radial-gradient(circle, rgba(255,255,255,.12) 0%, transparent 70%);
-  border-radius: 50%;
-}
-.profile-avatar {
-  width: 90px; height: 90px;
-  border-radius: 20px;
-  background: rgba(255,255,255,.15);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 44px;
-  flex-shrink: 0;
-  border: 2px solid rgba(255,255,255,.25);
-}
-.profile-hero-info { flex: 1; position: relative; z-index: 1; }
-.profile-cat { font-size: 11px; font-weight: 700; color: var(--blue-300); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 6px; }
-.profile-name { font-family: 'Syne', sans-serif; font-size: 30px; font-weight: 800; color: #fff; margin-bottom: 8px; }
-.profile-meta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-.profile-meta-item { display: flex; align-items: center; gap: 6px; font-size: 13px; color: rgba(255,255,255,.75); }
-.profile-actions { display: flex; gap: 10px; }
-.btn-call-big { background: var(--white); color: var(--blue-800); border: none; padding: 11px 22px; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; transition: all .2s; font-family: inherit; }
-.btn-wa-big { background: #25D366; color: #fff; border: none; padding: 11px 22px; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; transition: all .2s; font-family: inherit; }
-.btn-call-big:hover, .btn-wa-big:hover { transform: translateY(-2px); }
-
-.profile-layout { display: grid; grid-template-columns: 1fr 320px; gap: 22px; }
-.profile-main { display: flex; flex-direction: column; gap: 20px; }
-.profile-card {
-  background: var(--white);
-  border-radius: var(--r-md);
-  padding: 24px;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--gray-100);
-}
-.profile-card-title { font-size: 14px; font-weight: 700; color: var(--gray-700); margin-bottom: 14px; text-transform: uppercase; letter-spacing: .5px; }
-.hours-table { width: 100%; }
-.hours-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--gray-50); font-size: 13px; }
-.hours-row:last-child { border-bottom: none; }
-.hours-day { color: var(--gray-500); font-weight: 500; }
-.hours-time { font-weight: 600; color: var(--gray-900); }
-.hours-open { color: var(--green); }
-.hours-closed { color: var(--red); }
-.photos-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
-.photo-thumb {
-  aspect-ratio: 1;
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 32px; cursor: pointer;
-}
-.reviews-list { display: flex; flex-direction: column; gap: 14px; }
-.review-item { padding: 14px; background: var(--gray-50); border-radius: 10px; }
-.review-header { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
-.review-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--blue-100); display: flex; align-items: center; justify-content: center; font-size: 14px; }
-.review-name { font-size: 13px; font-weight: 700; }
-.review-date { font-size: 11px; color: var(--gray-500); }
-.review-stars { color: #F59E0B; font-size: 12px; }
-.review-text { font-size: 12px; color: var(--gray-700); line-height: 1.5; }
-
-.profile-sidebar { display: flex; flex-direction: column; gap: 16px; }
-.map-mini {
-  height: 180px;
-  background: #E8F4FF;
-  border-radius: 12px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 48px;
-  border: 1px solid var(--blue-100);
-  position: relative;
-  overflow: hidden;
-}
-.contact-list { display: flex; flex-direction: column; gap: 2px; }
-.contact-item {
-  display: flex; align-items: center; gap: 12px;
-  padding: 10px 12px; border-radius: 8px;
-  font-size: 13px; color: var(--gray-700);
-  transition: background .18s; cursor: pointer;
-}
-.contact-item:hover { background: var(--blue-50); }
-.contact-icon { font-size: 16px; width: 20px; text-align: center; }
-.contact-label { font-size: 10px; color: var(--gray-500); text-transform: uppercase; letter-spacing: .4px; }
-.contact-val { font-weight: 600; font-size: 13px; }
-.social-row { display: flex; gap: 8px; flex-wrap: wrap; }
-.social-btn {
-  display: flex; align-items: center; gap: 6px;
-  padding: 7px 14px;
-  border: 1.5px solid var(--gray-100);
-  border-radius: 8px;
-  font-size: 12px; font-weight: 600; cursor: pointer;
-  transition: all .18s; color: var(--gray-700);
-}
-.social-btn:hover { border-color: var(--blue-300); color: var(--blue-700); background: var(--blue-50); }
-
-/* ── FOOTER ── */
-footer {
-  background: var(--blue-900);
-  color: rgba(255,255,255,.5);
-  text-align: center;
-  padding: 20px 40px;
-  font-size: 12px;
-  margin-top: 32px;
-}
-footer strong { color: rgba(255,255,255,.8); }
-
-/* ── UTILS ── */
-.tag {
-  display: inline-block;
-  background: var(--blue-50);
-  color: var(--blue-700);
-  font-size: 10px;
-  font-weight: 700;
-  padding: 3px 10px;
-  border-radius: 20px;
-}
-.promo-banner {
-  background: linear-gradient(90deg, var(--amber), #F59E0B);
-  border-radius: 10px;
-  padding: 14px 20px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 20px;
-  color: var(--white);
-}
-.promo-icon { font-size: 22px; }
-.promo-text { flex: 1; font-size: 13px; font-weight: 600; }
-.promo-cta { background: rgba(255,255,255,.25); border: none; color: #fff; padding: 7px 16px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; font-family: inherit; }
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
 
-<header>
-  <a class="logo" href="#">
-    <div class="logo-icon">🌐</div>
-    <span class="logo-text">Milagro<span>Conecta</span></span>
-  </a>
-  <nav>
-    <button class="nav-link active" onclick="showScreen('home')">🏠 Inicio</button>
-    <button class="nav-link" onclick="showScreen('mapa')">🗺️ Mapa</button>
-    <button class="nav-link" onclick="showScreen('perfil')">🏪 Negocio</button>
-    <button class="nav-link" onclick="showScreen('registro')">✏️ Registrar</button>
-    <button class="nav-link" onclick="showScreen('admin')">⚙️ Admin</button>
-    <button class="btn-primary">Descargar App</button>
-  </nav>
+<!-- Íconos -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></symbol>
+  <symbol id="i-map" viewBox="0 0 24 24"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></symbol>
+  <symbol id="i-store" viewBox="0 0 24 24"><path d="M4 9l1.5-5h13L20 9"/><path d="M4 9a3 3 0 0 0 5.3 1.9A3 3 0 0 0 14.7 11 3 3 0 0 0 20 9"/><path d="M5 12v8h14v-8"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.4A8 8 0 1 1 21 12z"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.8-4.5 4.2 1.1 6L12 16.8 6.6 19.6l1.1-6L3.2 9.4l6.1-.8z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+</svg>
+
+<div class="demo-ribbon">Versión de demostración · los negocios y cifras que ves son datos de ejemplo</div>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="logo" href="#home" aria-label="Milagro Conecta, inicio">
+      <span class="logo-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.5a7.5 7.5 0 0 0-7.5 7.5c0 5.4 7.500 11.500 7.500 11.500s7.500-6.100 7.500-11.500A7.500 7.500 0 0 0 12 2.500z" fill="#fff"/><circle cx="12" cy="10" r="2.800" fill="#F5B63D"/></svg></span>
+      <span class="logo-text">Milagro<span>Conecta</span></span>
+    </a>
+    <nav class="nav-d" aria-label="Principal">
+      <button data-go="home"><svg class="ic"><use href="#i-home"/></svg>Inicio</button>
+      <button data-go="mapa"><svg class="ic"><use href="#i-map"/></svg>Mapa</button>
+      <button data-go="perfil"><svg class="ic"><use href="#i-store"/></svg>Negocio</button>
+      <button data-go="admin"><svg class="ic"><use href="#i-shield"/></svg>Admin</button>
+    </nav>
+    <button class="btn btn-pri btn-sm top-cta" data-go="registro"><svg class="ic"><use href="#i-plus"/></svg>Registrar mi negocio</button>
+  </div>
 </header>
 
-<div class="tabs-bar">
-  <button class="tab active" onclick="showScreen('home')">📱 Inicio App</button>
-  <button class="tab" onclick="showScreen('mapa')">🗺️ Mapa</button>
-  <button class="tab" onclick="showScreen('perfil')">🏪 Perfil Negocio</button>
-  <button class="tab" onclick="showScreen('registro')">✏️ Registrar Negocio</button>
-  <button class="tab" onclick="showScreen('admin')">⚙️ Panel Admin</button>
-</div>
+<main class="wrap">
 
-<main>
-
-<!-- ════ HOME SCREEN ════ -->
-<div id="screen-home" class="screen active">
-
+<!-- ═════ INICIO ═════ -->
+<section id="screen-home" class="screen">
   <div class="hero">
-    <div class="hero-content">
-      <div class="hero-badge">📍 Ciudad de Milagro, Ecuador</div>
-      <h1>Todos los negocios<br>de Milagro en un<br><span>solo lugar</span></h1>
-      <p>Restaurantes, farmacias, taxis, tiendas, profesionales y más. Encuentra lo que necesitas cerca de ti.</p>
-      <div class="hero-actions">
-        <button class="btn-hero btn-hero-main">🔍 Explorar negocios</button>
-        <button class="btn-hero btn-hero-outline" onclick="showScreen('registro')">✏️ Registrar mi negocio</button>
-      </div>
-      <div class="hero-stats">
-        <div class="hero-stat"><div class="hero-stat-num">248+</div><div class="hero-stat-label">Negocios</div></div>
-        <div class="hero-stat"><div class="hero-stat-num">9</div><div class="hero-stat-label">Categorías</div></div>
-        <div class="hero-stat"><div class="hero-stat-num">3.4k</div><div class="hero-stat-label">Usuarios activos</div></div>
-        <div class="hero-stat"><div class="hero-stat-num">4.8★</div><div class="hero-stat-label">Valoración</div></div>
-      </div>
+    <span class="pill"><svg class="ic" style="width:15px;height:15px"><use href="#i-pin"/></svg>Milagro, Guayas · Ecuador</span>
+    <h1>Todo Milagro,<br>en <em>un solo lugar</em></h1>
+    <p>Restaurantes, farmacias, taxis, tiendas y profesionales. Encuentra lo que necesitas cerca de ti y escríbeles directo por WhatsApp.</p>
+    <form class="searchbar" id="searchForm" role="search">
+      <label class="s-field grow"><svg class="ic"><use href="#i-search"/></svg><input id="q" type="search" placeholder="¿Qué buscas? Pizza, farmacia, taxi…" autocomplete="off" aria-label="Buscar negocios"></label>
+      <span class="s-sep" aria-hidden="true"></span>
+      <div class="s-field"><svg class="ic"><use href="#i-pin"/></svg><span style="font-weight:600;color:var(--ink)">Milagro Centro</span></div>
+      <button class="btn btn-pri" type="submit">Buscar</button>
+    </form>
+    <div class="hero-trust">
+      <span><svg class="ic" style="width:16px;height:16px"><use href="#i-check"/></svg>Registro gratis</span>
+      <span><svg class="ic" style="width:16px;height:16px"><use href="#i-check"/></svg>Contacto directo</span>
+      <span><svg class="ic" style="width:16px;height:16px"><use href="#i-check"/></svg>Negocios de tu ciudad</span>
     </div>
   </div>
 
-  <div class="promo-banner">
-    <div class="promo-icon">⭐</div>
-    <div class="promo-text">Farmacia Central abierta 24 horas · Delivery a domicilio disponible</div>
-    <button class="promo-cta">Ver oferta</button>
+  <div class="sec-head"><div><h2>Categorías</h2></div></div>
+  <div class="cats" id="cats" role="tablist" aria-label="Categorías"></div>
+
+  <div class="sec-head" id="results-top">
+    <div><h2 id="res-title">Negocios destacados</h2><p id="res-count"></p></div>
+  </div>
+  <div class="chips" id="chips" style="margin-bottom:16px"></div>
+  <div class="grid" id="grid" aria-live="polite"></div>
+
+  <div class="sec-head"><div><h2>Así de fácil</h2><p>Para clientes y para dueños de negocio</p></div></div>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><div><h3>Busca</h3><p>Escribe lo que necesitas o elige una categoría y mira qué hay cerca.</p></div></div>
+    <div class="step"><div class="n">2</div><div><h3>Compara</h3><p>Revisa horarios, fotos, reseñas y ubicación en el mapa.</p></div></div>
+    <div class="step"><div class="n">3</div><div><h3>Contacta</h3><p>Llama o escribe por WhatsApp con un solo toque.</p></div></div>
   </div>
 
-  <div class="search-section">
-    <div class="search-wrap">
-      <div class="search-input-wrap">
-        <span class="search-icon">🔍</span>
-        <input class="search-input" type="text" placeholder="Buscar restaurantes, farmacias, taxis...">
-      </div>
-      <div class="search-divider"></div>
-      <button class="location-btn">📍 Milagro Centro</button>
-      <button class="btn-search">Buscar</button>
+  <div class="owners">
+    <div>
+      <h2>¿Tienes un negocio en Milagro?</h2>
+      <p>Aparece donde tus clientes ya buscan. El registro básico es gratis.</p>
+      <div style="margin-top:18px"><button class="btn btn-gold" data-go="registro">Registrar mi negocio <svg class="ic"><use href="#i-arrow"/></svg></button></div>
+    </div>
+    <div class="owner-plans">
+      <div class="mini-plan"><div><b>Básico</b><span>Perfil + 1 foto</span></div><div class="pr">$0</div></div>
+      <div class="mini-plan"><div><b>Premium</b><span>Destacado + 20 fotos</span></div><div class="pr">$15<small style="font-size:12px">/mes</small></div></div>
+      <div class="mini-plan"><div><b>Banner</b><span>Publicidad destacada</span></div><div class="pr">$30<small style="font-size:12px">/sem</small></div></div>
     </div>
   </div>
+</section>
 
-  <div class="section-header">
-    <h2 class="section-title">Categorías</h2>
-    <a class="section-link" href="#">Ver todas →</a>
-  </div>
-  <div class="cats-grid">
-    <div class="cat-card active" onclick="filterCat(this)">
-      <span class="cat-icon">🍽️</span>
-      <div class="cat-name">Restaurantes</div>
-      <div class="cat-count">62 negocios</div>
-    </div>
-    <div class="cat-card" onclick="filterCat(this)">
-      <span class="cat-icon">💊</span>
-      <div class="cat-name">Farmacias</div>
-      <div class="cat-count">18 negocios</div>
-    </div>
-    <div class="cat-card" onclick="filterCat(this)">
-      <span class="cat-icon">🚕</span>
-      <div class="cat-name">Taxis</div>
-      <div class="cat-count">45 negocios</div>
-    </div>
-    <div class="cat-card" onclick="filterCat(this)">
-      <span class="cat-icon">🛍️</span>
-      <div class="cat-name">Tiendas</div>
-      <div class="cat-count">84 negocios</div>
-    </div>
-    <div class="cat-card" onclick="filterCat(this)">
-      <span class="cat-icon">💼</span>
-      <div class="cat-name">Profesionales</div>
-      <div class="cat-count">31 negocios</div>
-    </div>
-    <div class="cat-card" onclick="filterCat(this)">
-      <span class="cat-icon">🚌</span>
-      <div class="cat-name">Transporte</div>
-      <div class="cat-count">12 rutas</div>
-    </div>
-    <div class="cat-card" onclick="filterCat(this)">
-      <span class="cat-icon">💡</span>
-      <div class="cat-name">Empren.</div>
-      <div class="cat-count">39 negocios</div>
-    </div>
-    <div class="cat-card" onclick="filterCat(this)">
-      <span class="cat-icon">💻</span>
-      <div class="cat-name">Tecnología</div>
-      <div class="cat-count">14 negocios</div>
-    </div>
-    <div class="cat-card" onclick="filterCat(this)">
-      <span class="cat-icon">🔧</span>
-      <div class="cat-name">Servicios</div>
-      <div class="cat-count">28 negocios</div>
-    </div>
-  </div>
-
-  <div class="section-header">
-    <h2 class="section-title">Negocios destacados</h2>
-    <div style="display:flex;gap:8px">
-      <div class="filters-row" style="margin:0">
-        <button class="filter-chip active" onclick="toggleFilter(this)">⭐ Mejor valorados</button>
-        <button class="filter-chip" onclick="toggleFilter(this)">📍 Más cercanos</button>
-        <button class="filter-chip" onclick="toggleFilter(this)">🆕 Nuevos</button>
-        <button class="filter-chip" onclick="toggleFilter(this)">🟢 Abiertos ahora</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="biz-grid">
-    <div class="biz-card" onclick="showScreen('perfil')">
-      <div class="biz-card-img" style="background:#FFF3E0">🍕
-        <div class="biz-card-badge">⭐ DESTACADO</div>
-        <div class="biz-card-open">● Abierto</div>
-      </div>
-      <div class="biz-card-body">
-        <div class="biz-card-cat">🍽️ Restaurante</div>
-        <div class="biz-card-name">Pizza Milagro</div>
-        <div class="biz-card-desc">Las mejores pizzas artesanales de la ciudad. Delivery disponible toda la semana. Ingredientes frescos.</div>
-        <div class="biz-card-footer">
-          <div class="biz-rating"><span class="stars-text">★★★★★</span> 4.9 <span style="color:var(--gray-500);font-size:11px">(48)</span></div>
-          <div class="biz-dist">📍 300m</div>
-          <div class="biz-actions">
-            <div class="biz-action-btn">📞</div>
-            <div class="biz-action-btn">💬</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="biz-card" onclick="showScreen('perfil')">
-      <div class="biz-card-img" style="background:#E8F5E9">💊
-        <div class="biz-card-badge">🥇 PREMIUM</div>
-        <div class="biz-card-open">● Abierto 24h</div>
-      </div>
-      <div class="biz-card-body">
-        <div class="biz-card-cat">💊 Farmacia</div>
-        <div class="biz-card-name">Farmacia Central</div>
-        <div class="biz-card-desc">Atención 24 horas. Medicamentos genéricos y de marca. Servicio a domicilio disponible en toda la ciudad.</div>
-        <div class="biz-card-footer">
-          <div class="biz-rating"><span class="stars-text">★★★★☆</span> 4.5 <span style="color:var(--gray-500);font-size:11px">(92)</span></div>
-          <div class="biz-dist">📍 700m</div>
-          <div class="biz-actions">
-            <div class="biz-action-btn">📞</div>
-            <div class="biz-action-btn">💬</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="biz-card" onclick="showScreen('perfil')">
-      <div class="biz-card-img" style="background:#E3F2FD">🚕
-        <div class="biz-card-open">● Disponible</div>
-      </div>
-      <div class="biz-card-body">
-        <div class="biz-card-cat">🚕 Transporte</div>
-        <div class="biz-card-name">Taxi Express Milagro</div>
-        <div class="biz-card-desc">Servicio de taxi seguro y puntual. Cobertura en toda la ciudad y cantones vecinos. Reserva por WhatsApp.</div>
-        <div class="biz-card-footer">
-          <div class="biz-rating"><span class="stars-text">★★★★★</span> 5.0 <span style="color:var(--gray-500);font-size:11px">(201)</span></div>
-          <div class="biz-dist">📍 1.1km</div>
-          <div class="biz-actions">
-            <div class="biz-action-btn">📞</div>
-            <div class="biz-action-btn">💬</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="biz-card" onclick="showScreen('perfil')">
-      <div class="biz-card-img" style="background:#FCE4EC">🌸
-        <div class="biz-card-badge">🆕 NUEVO</div>
-      </div>
-      <div class="biz-card-body">
-        <div class="biz-card-cat">💡 Emprendimiento</div>
-        <div class="biz-card-name">Spa Milagros</div>
-        <div class="biz-card-desc">Masajes, tratamientos faciales y corporales. Ambientes relajantes. Precios accesibles para toda la familia.</div>
-        <div class="biz-card-footer">
-          <div class="biz-rating"><span class="stars-text">★★★★☆</span> 4.3 <span style="color:var(--gray-500);font-size:11px">(17)</span></div>
-          <div class="biz-dist">📍 2.4km</div>
-          <div class="biz-actions">
-            <div class="biz-action-btn">📞</div>
-            <div class="biz-action-btn">💬</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="biz-card" onclick="showScreen('perfil')">
-      <div class="biz-card-img" style="background:#F3E5F5">⚖️
-        <div class="biz-card-badge">⭐ DESTACADO</div>
-        <div class="biz-card-open">● Abierto</div>
-      </div>
-      <div class="biz-card-body">
-        <div class="biz-card-cat">💼 Profesional</div>
-        <div class="biz-card-name">Estudio Jurídico Paz</div>
-        <div class="biz-card-desc">Asesoría legal en derecho civil, laboral y comercial. Primera consulta gratuita. 15 años de experiencia.</div>
-        <div class="biz-card-footer">
-          <div class="biz-rating"><span class="stars-text">★★★★★</span> 4.8 <span style="color:var(--gray-500);font-size:11px">(34)</span></div>
-          <div class="biz-dist">📍 1.8km</div>
-          <div class="biz-actions">
-            <div class="biz-action-btn">📞</div>
-            <div class="biz-action-btn">💬</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="biz-card" onclick="showScreen('perfil')">
-      <div class="biz-card-img" style="background:#E0F2F1">💻
-        <div class="biz-card-open">● Abierto</div>
-      </div>
-      <div class="biz-card-body">
-        <div class="biz-card-cat">💻 Tecnología</div>
-        <div class="biz-card-name">TechMilagro</div>
-        <div class="biz-card-desc">Reparación de celulares, laptops y tablets. Venta de accesorios. Soporte técnico empresarial.</div>
-        <div class="biz-card-footer">
-          <div class="biz-rating"><span class="stars-text">★★★★☆</span> 4.6 <span style="color:var(--gray-500);font-size:11px">(56)</span></div>
-          <div class="biz-dist">📍 500m</div>
-          <div class="biz-actions">
-            <div class="biz-action-btn">📞</div>
-            <div class="biz-action-btn">💬</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ════ MAP SCREEN ════ -->
-<div id="screen-mapa" class="screen">
-  <div style="margin-bottom:20px">
-    <h2 class="section-title" style="margin-bottom:4px">🗺️ Mapa interactivo</h2>
-    <p style="color:var(--gray-500);font-size:13px">Explora todos los negocios de Milagro geolocalizados</p>
-  </div>
+<!-- ═════ MAPA ═════ -->
+<section id="screen-mapa" class="screen">
+  <div class="sec-head" style="margin-top:6px"><div><h2>Mapa de negocios</h2><p>Toca un punto para ver el negocio (mapa ilustrativo de la demo)</p></div></div>
+  <div class="cats" id="mapCats" style="margin-bottom:6px"></div>
   <div class="map-layout">
-    <div class="map-sidebar">
-      <div class="map-sidebar-header">
-        <div class="sidebar-search">
-          <span>🔍</span>
-          <input type="text" placeholder="Buscar en el mapa...">
-        </div>
-        <div class="map-filters">
-          <button class="map-filter active" onclick="toggleFilter(this)">Todos</button>
-          <button class="map-filter" onclick="toggleFilter(this)">🍽️</button>
-          <button class="map-filter" onclick="toggleFilter(this)">💊</button>
-          <button class="map-filter" onclick="toggleFilter(this)">🚕</button>
-          <button class="map-filter" onclick="toggleFilter(this)">🛍️</button>
-          <button class="map-filter" onclick="toggleFilter(this)">💼</button>
-          <button class="map-filter" onclick="toggleFilter(this)">🔧</button>
-        </div>
-      </div>
-      <div class="map-results">
-        <div style="padding:10px 16px;font-size:11px;color:var(--gray-500);font-weight:700;text-transform:uppercase;letter-spacing:.5px">23 negocios encontrados</div>
-        <div class="map-result-item" style="cursor:pointer" onclick="showScreen('perfil')">
-          <div class="map-result-icon" style="background:#FFF3E0">🍕</div>
-          <div class="map-result-info">
-            <div class="map-result-name">Pizza Milagro</div>
-            <div class="map-result-cat">Restaurante</div>
-            <div class="map-result-meta"><span class="map-result-dist">📍 300m</span><span class="map-result-rating">★★★★★ 4.9</span></div>
-          </div>
-        </div>
-        <div class="map-result-item">
-          <div class="map-result-icon" style="background:#E8F5E9">💊</div>
-          <div class="map-result-info">
-            <div class="map-result-name">Farmacia Central</div>
-            <div class="map-result-cat">Farmacia · Abierta 24h</div>
-            <div class="map-result-meta"><span class="map-result-dist">📍 700m</span><span class="map-result-rating">★★★★☆ 4.5</span></div>
-          </div>
-        </div>
-        <div class="map-result-item">
-          <div class="map-result-icon" style="background:#E3F2FD">🚕</div>
-          <div class="map-result-info">
-            <div class="map-result-name">Taxi Express Milagro</div>
-            <div class="map-result-cat">Transporte · Disponible</div>
-            <div class="map-result-meta"><span class="map-result-dist">📍 1.1km</span><span class="map-result-rating">★★★★★ 5.0</span></div>
-          </div>
-        </div>
-        <div class="map-result-item">
-          <div class="map-result-icon" style="background:#FCE4EC">🌸</div>
-          <div class="map-result-info">
-            <div class="map-result-name">Spa Milagros</div>
-            <div class="map-result-cat">Emprendimiento</div>
-            <div class="map-result-meta"><span class="map-result-dist">📍 2.4km</span><span class="map-result-rating">★★★★☆ 4.3</span></div>
-          </div>
-        </div>
-        <div class="map-result-item">
-          <div class="map-result-icon" style="background:#F3E5F5">⚖️</div>
-          <div class="map-result-info">
-            <div class="map-result-name">Estudio Jurídico Paz</div>
-            <div class="map-result-cat">Profesional</div>
-            <div class="map-result-meta"><span class="map-result-dist">📍 1.8km</span><span class="map-result-rating">★★★★★ 4.8</span></div>
-          </div>
-        </div>
-        <div class="map-result-item">
-          <div class="map-result-icon" style="background:#FFF8E1">🍗</div>
-          <div class="map-result-info">
-            <div class="map-result-name">Pollos Asados Don Marco</div>
-            <div class="map-result-cat">Restaurante</div>
-            <div class="map-result-meta"><span class="map-result-dist">📍 950m</span><span class="map-result-rating">★★★★☆ 4.4</span></div>
-          </div>
-        </div>
-        <div class="map-result-item">
-          <div class="map-result-icon" style="background:#E0F2F1">💻</div>
-          <div class="map-result-info">
-            <div class="map-result-name">TechMilagro</div>
-            <div class="map-result-cat">Tecnología</div>
-            <div class="map-result-meta"><span class="map-result-dist">📍 500m</span><span class="map-result-rating">★★★★☆ 4.6</span></div>
-          </div>
-        </div>
-      </div>
+    <div class="map" id="map" aria-label="Mapa ilustrativo de negocios de Milagro">
+      <div class="block" style="left:4%;top:6%;width:30%;height:26%"></div>
+      <div class="block" style="left:42%;top:5%;width:26%;height:22%"></div>
+      <div class="block" style="left:74%;top:8%;width:22%;height:24%"></div>
+      <div class="block" style="left:5%;top:58%;width:26%;height:30%"></div>
+      <div class="block" style="left:40%;top:60%;width:30%;height:28%"></div>
+      <div class="block" style="left:76%;top:62%;width:20%;height:26%"></div>
+      <div class="park" style="left:44%;top:30%;width:60px;height:60px"></div>
+      <div class="road" style="left:0;right:0;top:43%;height:16px"></div>
+      <div class="road" style="top:0;bottom:0;left:36%;width:14px"></div>
+      <div class="road" style="top:0;bottom:0;left:71%;width:10px"></div>
+      <div class="rl" style="left:4%;top:calc(43% + 20px)">Av. 17 de Septiembre</div>
+      <div class="rl" style="left:calc(36% + 18px);top:84%;transform:rotate(0)">Av. Juan Montalvo</div>
+      <div id="pins"></div>
+      <div class="map-pop" id="pop"></div>
     </div>
-    <div class="map-view">
-      <div class="map-placeholder">
-        <svg class="map-bg-svg" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
-          <!-- Road grid -->
-          <rect width="800" height="600" fill="#E8F4FF"/>
-          <!-- Main avenues -->
-          <rect x="0" y="180" width="800" height="28" fill="#D0E8F5" rx="0"/>
-          <rect x="0" y="340" width="800" height="28" fill="#D0E8F5"/>
-          <rect x="180" y="0" width="28" height="600" fill="#D0E8F5"/>
-          <rect x="400" y="0" width="28" height="600" fill="#D0E8F5"/>
-          <rect x="600" y="0" width="28" height="600" fill="#D0E8F5"/>
-          <!-- Secondary streets -->
-          <rect x="0" y="90" width="800" height="10" fill="#DEEDF7" opacity=".7"/>
-          <rect x="0" y="270" width="800" height="10" fill="#DEEDF7" opacity=".7"/>
-          <rect x="0" y="450" width="800" height="10" fill="#DEEDF7" opacity=".7"/>
-          <rect x="90" y="0" width="10" height="600" fill="#DEEDF7" opacity=".7"/>
-          <rect x="290" y="0" width="10" height="600" fill="#DEEDF7" opacity=".7"/>
-          <rect x="500" y="0" width="10" height="600" fill="#DEEDF7" opacity=".7"/>
-          <rect x="700" y="0" width="10" height="600" fill="#DEEDF7" opacity=".7"/>
-          <!-- Blocks -->
-          <rect x="10" y="10" width="70" height="70" fill="#C5DFF0" rx="4" opacity=".5"/>
-          <rect x="200" y="10" width="190" height="70" fill="#C5DFF0" rx="4" opacity=".5"/>
-          <rect x="430" y="10" width="160" height="70" fill="#C5DFF0" rx="4" opacity=".5"/>
-          <rect x="620" y="10" width="170" height="70" fill="#C5DFF0" rx="4" opacity=".5"/>
-          <rect x="10" y="100" width="70" height="70" fill="#C5DFF0" rx="4" opacity=".5"/>
-          <rect x="200" y="100" width="190" height="70" fill="#C5DFF0" rx="4" opacity=".5"/>
-          <rect x="430" y="100" width="160" height="70" fill="#C5DFF0" rx="4" opacity=".5"/>
-          <rect x="620" y="100" width="170" height="70" fill="#C5DFF0" rx="4" opacity=".5"/>
-          <rect x="10" y="220" width="70" height="110" fill="#C5DFF0" rx="4" opacity=".5"/>
-          <rect x="200" y="220" width="190" height="110" fill="#C5DFF0" rx="4" opacity=".5"/>
-          <rect x="430" y="220" width="160" height="110" fill="#C5DFF0" rx="4" opacity=".5"/>
-          <rect x="620" y="220" width="170" height="110" fill="#C5DFF0" rx="4" opacity=".5"/>
-          <rect x="10" y="370" width="70" height="70" fill="#C5DFF0" rx="4" opacity=".5"/>
-          <rect x="200" y="370" width="190" height="70" fill="#C5DFF0" rx="4" opacity=".5"/>
-          <rect x="430" y="370" width="160" height="70" fill="#C5DFF0" rx="4" opacity=".5"/>
-          <rect x="620" y="370" width="170" height="70" fill="#C5DFF0" rx="4" opacity=".5"/>
-          <rect x="10" y="460" width="70" height="130" fill="#C5DFF0" rx="4" opacity=".5"/>
-          <rect x="200" y="460" width="190" height="130" fill="#C5DFF0" rx="4" opacity=".5"/>
-          <rect x="430" y="460" width="160" height="130" fill="#C5DFF0" rx="4" opacity=".5"/>
-          <rect x="620" y="460" width="170" height="130" fill="#C5DFF0" rx="4" opacity=".5"/>
-          <!-- Street labels -->
-          <text x="400" y="176" text-anchor="middle" font-size="9" fill="#6B9EB8" font-family="Plus Jakarta Sans,sans-serif" font-weight="600">AV. 17 DE SEPTIEMBRE</text>
-          <text x="400" y="338" text-anchor="middle" font-size="9" fill="#6B9EB8" font-family="Plus Jakarta Sans,sans-serif" font-weight="600">AV. JUAN MONTALVO</text>
-        </svg>
-        <!-- Map pins -->
-        <div class="map-pin-el" style="top:25%;left:18%;background:#EF5350"><span>🍕</span></div>
-        <div class="map-pin-el" style="top:55%;left:38%;background:#42A5F5"><span>💊</span></div>
-        <div class="map-pin-el" style="top:20%;left:55%;background:#66BB6A"><span>🚕</span></div>
-        <div class="map-pin-el" style="top:65%;left:62%;background:#FF7043"><span>🛍️</span></div>
-        <div class="map-pin-el" style="top:40%;left:72%;background:#AB47BC"><span>💼</span></div>
-        <div class="map-pin-el" style="top:70%;left:20%;background:#26A69A"><span>🍗</span></div>
-        <div class="map-pin-el" style="top:35%;left:45%;background:#5C6BC0"><span>💻</span></div>
-        <div class="map-pin-el" style="top:55%;left:80%;background:#EC407A"><span>🌸</span></div>
-        <!-- You are here -->
-        <div style="position:absolute;top:48%;left:50%;transform:translate(-50%,-50%)">
-          <div style="width:16px;height:16px;border-radius:50%;background:var(--blue-700);border:3px solid #fff;box-shadow:0 0 0 6px rgba(21,101,192,.2)"></div>
-        </div>
-        <!-- Controls -->
-        <div class="map-controls">
-          <div class="map-ctrl-btn">+</div>
-          <div class="map-ctrl-btn">−</div>
-          <div class="map-ctrl-btn">📍</div>
-          <div class="map-ctrl-btn">🔍</div>
-        </div>
-        <div class="map-legend">
-          <div class="map-legend-title">Categorías</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#EF5350"></div>Restaurantes</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#42A5F5"></div>Farmacias</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#66BB6A"></div>Taxis</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#FF7043"></div>Tiendas</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#AB47BC"></div>Profesionales</div>
-        </div>
-      </div>
-    </div>
+    <div class="list-col" id="mapList"></div>
   </div>
-</div>
+</section>
 
-<!-- ════ BUSINESS PROFILE SCREEN ════ -->
-<div id="screen-perfil" class="screen">
-  <div class="profile-hero">
-    <div class="profile-avatar">🍕</div>
-    <div class="profile-hero-info">
-      <div class="profile-cat">🍽️ Restaurante · <span style="color:rgba(255,255,255,.6)">Cdla. Kennedy, Milagro</span></div>
-      <div class="profile-name">Pizza Milagro</div>
-      <div class="profile-meta">
-        <div class="profile-meta-item">⭐ <strong style="color:#fff">4.9</strong> (48 reseñas)</div>
-        <div class="profile-meta-item">🟢 Abierto ahora</div>
-        <div class="profile-meta-item">📍 300m de distancia</div>
-        <div class="tag" style="background:rgba(255,255,255,.15);color:var(--blue-200, #90CAF9);">⭐ DESTACADO</div>
-      </div>
-    </div>
-    <div class="profile-actions">
-      <button class="btn-call-big">📞 Llamar</button>
-      <button class="btn-wa-big">💬 WhatsApp</button>
-    </div>
-  </div>
-  <div class="profile-layout">
-    <div class="profile-main">
-      <div class="profile-card">
-        <div class="profile-card-title">📖 Descripción</div>
-        <p style="font-size:14px;color:var(--gray-700);line-height:1.7">Las mejores pizzas artesanales de Milagro. Usamos ingredientes frescos importados y masa madre elaborada en casa. Contamos con delivery disponible toda la semana y opciones vegetarianas. También atendemos eventos y pedidos corporativos.</p>
-        <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
-          <span class="tag">🚚 Delivery</span>
-          <span class="tag">🥗 Vegetariano</span>
-          <span class="tag">🎂 Pedidos especiales</span>
-          <span class="tag">💳 Acepta tarjetas</span>
-        </div>
-      </div>
-      <div class="profile-card">
-        <div class="profile-card-title">📷 Galería de fotos</div>
-        <div class="photos-grid">
-          <div class="photo-thumb" style="background:#FFF3E0">🍕</div>
-          <div class="photo-thumb" style="background:#FFF8E1">🍝</div>
-          <div class="photo-thumb" style="background:#FFEBEE">🫓</div>
-          <div class="photo-thumb" style="background:#E8F5E9">🥗</div>
-          <div class="photo-thumb" style="background:#E3F2FD">🧃</div>
-          <div class="photo-thumb" style="background:#F3E5F5;color:var(--blue-700);font-size:16px;font-weight:700">+6</div>
-        </div>
-      </div>
-      <div class="profile-card">
-        <div class="profile-card-title">⭐ Reseñas de clientes</div>
-        <div style="display:flex;align-items:center;gap:20px;margin-bottom:18px;padding:16px;background:var(--blue-50);border-radius:12px">
-          <div style="text-align:center">
-            <div style="font-family:'Syne',sans-serif;font-size:42px;font-weight:800;color:var(--blue-700);line-height:1">4.9</div>
-            <div style="color:#F59E0B;font-size:18px">★★★★★</div>
-            <div style="font-size:11px;color:var(--gray-500)">48 reseñas</div>
-          </div>
-          <div style="flex:1">
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span style="font-size:11px;color:var(--gray-500);width:20px">5★</span><div style="flex:1;height:6px;background:var(--gray-100);border-radius:3px;overflow:hidden"><div style="width:85%;height:100%;background:#F59E0B;border-radius:3px"></div></div><span style="font-size:11px;color:var(--gray-500)">40</span></div>
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span style="font-size:11px;color:var(--gray-500);width:20px">4★</span><div style="flex:1;height:6px;background:var(--gray-100);border-radius:3px;overflow:hidden"><div style="width:12%;height:100%;background:#F59E0B;border-radius:3px"></div></div><span style="font-size:11px;color:var(--gray-500)">6</span></div>
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span style="font-size:11px;color:var(--gray-500);width:20px">3★</span><div style="flex:1;height:6px;background:var(--gray-100);border-radius:3px;overflow:hidden"><div style="width:4%;height:100%;background:#F59E0B;border-radius:3px"></div></div><span style="font-size:11px;color:var(--gray-500)">2</span></div>
-            <div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:var(--gray-500);width:20px">1★</span><div style="flex:1;height:6px;background:var(--gray-100);border-radius:3px;overflow:hidden"><div style="width:0%;height:100%;background:#F59E0B;border-radius:3px"></div></div><span style="font-size:11px;color:var(--gray-500)">0</span></div>
-          </div>
-        </div>
-        <div class="reviews-list">
-          <div class="review-item">
-            <div class="review-header">
-              <div class="review-avatar">👤</div>
-              <div>
-                <div class="review-name">María González</div>
-                <div class="review-date">Hace 2 días</div>
-              </div>
-              <div class="review-stars" style="margin-left:auto">★★★★★</div>
-            </div>
-            <div class="review-text">Excelente servicio y la pizza llegó caliente a domicilio. La masa artesanal es increíble, la mejor que he probado en Milagro. ¡Volveré pronto!</div>
-          </div>
-          <div class="review-item">
-            <div class="review-header">
-              <div class="review-avatar">👤</div>
-              <div>
-                <div class="review-name">Carlos Andrade</div>
-                <div class="review-date">Hace 5 días</div>
-              </div>
-              <div class="review-stars" style="margin-left:auto">★★★★★</div>
-            </div>
-            <div class="review-text">Pedí para una reunión familiar y quedaron todos encantados. Los precios son muy accesibles y la calidad es top. 100% recomendado.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="profile-sidebar">
-      <div class="profile-card" style="padding:0;overflow:hidden">
-        <div class="map-mini">🗺️
-          <div style="position:absolute;bottom:8px;left:8px;background:#fff;border-radius:8px;padding:5px 10px;font-size:11px;font-weight:600;color:var(--blue-700);box-shadow:var(--shadow-sm)">Ver en Google Maps →</div>
-        </div>
-        <div style="padding:14px 16px">
-          <div style="font-size:12px;color:var(--gray-500);margin-bottom:2px">📍 Dirección</div>
-          <div style="font-size:13px;font-weight:600">Cdla. Kennedy, Calle 8va y Av. 17 de Septiembre, Milagro</div>
-        </div>
-      </div>
-      <div class="profile-card">
-        <div class="profile-card-title">🕐 Horarios</div>
-        <div class="hours-table">
-          <div class="hours-row"><span class="hours-day">Lunes – Viernes</span><span class="hours-time hours-open">08:00 – 22:00</span></div>
-          <div class="hours-row"><span class="hours-day">Sábado</span><span class="hours-time hours-open">09:00 – 23:00</span></div>
-          <div class="hours-row"><span class="hours-day">Domingo</span><span class="hours-time hours-open">10:00 – 21:00</span></div>
-        </div>
-      </div>
-      <div class="profile-card">
-        <div class="profile-card-title">📞 Contacto</div>
-        <div class="contact-list">
-          <div class="contact-item"><span class="contact-icon">📞</span><div><div class="contact-label">Teléfono</div><div class="contact-val">04-280-1234</div></div></div>
-          <div class="contact-item"><span class="contact-icon">💬</span><div><div class="contact-label">WhatsApp</div><div class="contact-val">+593 98 765 4321</div></div></div>
-          <div class="contact-item"><span class="contact-icon">✉️</span><div><div class="contact-label">Email</div><div class="contact-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="244d4a424b64544d5e5e45494d484543564b0a4147">[email&#160;protected]</a></div></div></div>
-        </div>
-        <div style="margin-top:14px">
-          <div class="profile-card-title" style="margin-bottom:10px">🌐 Redes sociales</div>
-          <div class="social-row">
-            <button class="social-btn">📘 Facebook</button>
-            <button class="social-btn">📸 Instagram</button>
-            <button class="social-btn">🎵 TikTok</button>
-          </div>
-        </div>
-      </div>
-      <div class="profile-card" style="background:linear-gradient(135deg,var(--amber),#F59E0B);border:none">
-        <div style="color:#fff;font-size:13px;font-weight:700;margin-bottom:6px">🏷️ Promoción activa</div>
-        <div style="color:rgba(255,255,255,.9);font-size:20px;font-weight:800;margin-bottom:4px">20% OFF</div>
-        <div style="color:rgba(255,255,255,.85);font-size:12px">En todas las pizzas los martes. Válido hasta el 31 de marzo.</div>
-        <button style="margin-top:12px;background:rgba(255,255,255,.25);border:none;color:#fff;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit">Ver más ofertas →</button>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- ═════ PERFIL ═════ -->
+<section id="screen-perfil" class="screen">
+  <button class="back" data-go="home"><svg class="ic"><use href="#i-back"/></svg>Volver a negocios</button>
+  <div id="profile"></div>
+</section>
 
-<!-- ════ REGISTER SCREEN ════ -->
-<div id="screen-registro" class="screen">
-  <div class="register-layout">
+<!-- ═════ REGISTRO ═════ -->
+<section id="screen-registro" class="screen">
+  <div class="sec-head" style="margin-top:6px"><div><h2>Registra tu negocio</h2><p>Llega a más clientes en Milagro. Toma 3 minutos.</p></div></div>
+  <div class="reg-layout">
     <div>
-      <h2 class="section-title" style="margin-bottom:4px">✏️ Registra tu negocio</h2>
-      <p style="color:var(--gray-500);font-size:13px;margin-bottom:22px">Llega a miles de clientes en Milagro de forma gratuita</p>
-      <div class="register-form-card">
-        <div class="form-steps">
-          <div class="form-step done">✓ Datos básicos</div>
-          <div class="form-step active">Contacto</div>
-          <div class="form-step">Ubicación</div>
-          <div class="form-step">Fotos</div>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Nombre del negocio *</label>
-          <input class="form-input" type="text" placeholder="Ej: Pizza Milagro">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Tipo de negocio *</label>
-          <select class="form-select">
-            <option>Selecciona una categoría...</option>
-            <option>🍽️ Restaurante / Comida</option>
-            <option>💊 Farmacia</option>
-            <option>🚕 Taxi / Transporte</option>
-            <option>🛍️ Tienda / Comercio</option>
-            <option>💼 Profesional / Servicio</option>
-            <option>🚌 Transporte público</option>
-            <option>💡 Emprendimiento</option>
-            <option>💻 Tecnología</option>
-            <option>🔧 Servicios generales</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Descripción del negocio *</label>
-          <textarea class="form-input" rows="3" placeholder="Describe qué ofreces, qué te diferencia..."></textarea>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Teléfono *</label>
-            <input class="form-input" type="tel" placeholder="04-280-XXXX">
+      <div class="box" id="regBox">
+        <div class="progress" aria-hidden="true"><i id="prog"></i></div>
+        <form id="regForm" class="form-grid" novalidate>
+          <div class="field"><label for="f-name">Nombre del negocio <i>*</i></label><input id="f-name" required placeholder="Ej: Pizza Milagro"><div class="msg">Escribe el nombre de tu negocio.</div></div>
+          <div class="field"><label for="f-cat">Tipo de negocio <i>*</i></label>
+            <select id="f-cat" required>
+              <option value="">Selecciona una categoría…</option>
+              <option>🍽️ Restaurante / Comida</option><option>💊 Farmacia</option><option>🚕 Taxi / Transporte</option><option>🛍️ Tienda / Comercio</option><option>💼 Profesional / Servicio</option><option>🚌 Transporte público</option><option>💡 Emprendimiento</option><option>💻 Tecnología</option><option>🔧 Servicios generales</option>
+            </select><div class="msg">Elige una categoría.</div></div>
+          <div class="field"><label for="f-desc">Descripción <i>*</i></label><textarea id="f-desc" required placeholder="Cuéntales a tus clientes qué ofreces, tus horarios y qué te hace diferente."></textarea><div class="msg">Agrega una breve descripción.</div></div>
+          <div class="two">
+            <div class="field"><label for="f-tel">Teléfono <i>*</i></label><input id="f-tel" type="tel" inputmode="tel" required placeholder="04 280 1234"><div class="msg">Escribe un teléfono de contacto.</div></div>
+            <div class="field"><label for="f-wa">WhatsApp</label><input id="f-wa" type="tel" inputmode="tel" placeholder="+593 98 765 4321"></div>
           </div>
-          <div class="form-group">
-            <label class="form-label">WhatsApp</label>
-            <input class="form-input" type="tel" placeholder="+593 99 XXX XXXX">
+          <div class="field"><label for="f-mail">Correo electrónico</label><input id="f-mail" type="email" inputmode="email" placeholder="tunegocio@correo.com"></div>
+          <div class="field"><label for="f-dir">Dirección <i>*</i></label><input id="f-dir" required placeholder="Calle, sector o referencia en Milagro"><div class="msg">Indica dónde queda tu negocio.</div></div>
+          <div class="field"><label>Fotos del negocio</label>
+            <div class="drop" id="drop" tabindex="0" role="button" aria-label="Subir fotos"><svg class="ic" style="width:30px;height:30px"><use href="#i-plus"/></svg><b id="dropTxt">Arrastra tus fotos aquí o toca para subir</b>PNG o JPG hasta 5 MB · máximo 10 fotos</div>
+            <input type="file" id="files" accept="image/png,image/jpeg" multiple hidden>
           </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Correo electrónico</label>
-          <input class="form-input" type="email" placeholder="tu@negocio.com">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Dirección *</label>
-          <input class="form-input" type="text" placeholder="Cdla., Calle, Número, Referencia...">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Fotos del negocio</label>
-          <div class="photo-upload">
-            <div class="photo-upload-icon">📸</div>
-            <div class="photo-upload-text">Arrastra tus fotos aquí o <strong>haz clic para subir</strong><br><span style="font-size:11px;color:var(--gray-300)">PNG, JPG hasta 5MB · Máximo 10 fotos</span></div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Plan</label>
-          <div style="display:flex;gap:10px">
-            <div style="flex:1;padding:12px;border:1.5px solid var(--gray-100);border-radius:10px;cursor:pointer">
-              <div style="font-size:12px;font-weight:700;margin-bottom:2px">Básico Gratis</div>
-              <div style="font-size:11px;color:var(--gray-500)">Perfil básico + 1 foto</div>
-              <div style="font-size:16px;font-weight:800;color:var(--green);margin-top:4px">$0 / mes</div>
-            </div>
-            <div style="flex:1;padding:12px;border:2px solid var(--blue-600);border-radius:10px;cursor:pointer;background:var(--blue-50)">
-              <div style="font-size:12px;font-weight:700;margin-bottom:2px;color:var(--blue-800)">Premium ⭐</div>
-              <div style="font-size:11px;color:var(--blue-600)">Destacado + 20 fotos + stats</div>
-              <div style="font-size:16px;font-weight:800;color:var(--blue-700);margin-top:4px">$15 / mes</div>
+          <div class="field"><label>Plan</label>
+            <div class="plans">
+              <label class="plan"><input type="radio" name="plan" value="Básico" checked><div class="plan-in"><div><b>Básico</b><small>Perfil + 1 foto</small></div><div class="pr">Gratis</div></div></label>
+              <label class="plan"><span class="rib">Recomendado</span><input type="radio" name="plan" value="Premium"><div class="plan-in"><div><b>Premium ⭐</b><small>Destacado + 20 fotos + estadísticas</small></div><div class="pr">$15<small>/mes</small></div></div></label>
             </div>
           </div>
-        </div>
-        <div class="form-group" style="margin-bottom:0">
-          <div class="form-check">
-            <input type="checkbox" id="terms">
-            <label for="terms" style="font-size:12px;color:var(--gray-600)">Acepto los <span style="color:var(--blue-700);font-weight:600">Términos y Condiciones</span> y la <span style="color:var(--blue-700);font-weight:600">Política de Privacidad</span> de Milagro Conecta</label>
-          </div>
-        </div>
-        <button class="btn-form">Registrar mi negocio →</button>
+          <div class="field" id="termsField"><label class="check"><input type="checkbox" id="f-terms"><span>Acepto los Términos y Condiciones y la Política de Privacidad de Milagro Conecta.</span></label><div class="msg">Debes aceptar para continuar.</div></div>
+          <button class="btn btn-pri btn-block" type="submit" style="padding:15px">Registrar mi negocio <svg class="ic"><use href="#i-arrow"/></svg></button>
+        </form>
+      </div>
+      <div class="box ok-card" id="regOk" style="display:none">
+        <div class="big"><svg class="ic"><use href="#i-check"/></svg></div>
+        <h2 style="font-family:'Syne',sans-serif;font-size:24px;color:var(--navy)">¡Solicitud recibida!</h2>
+        <p style="margin:8px 0 18px"><b id="okName"></b> quedó en revisión. Te avisaremos cuando esté publicado.</p>
+        <p style="font-size:13px;color:var(--ink-3);margin-bottom:18px">Demo: por ahora esta solicitud no se guarda en ningún servidor.</p>
+        <button class="btn btn-pri" data-go="home">Volver al inicio</button>
       </div>
     </div>
-    <div class="register-sidebar">
-      <div class="info-card">
-        <div class="info-card-title">💰 Planes disponibles</div>
-        <div class="plan-comparison">
-          <div class="plan-row">
-            <div><div class="plan-row-name">Básico</div><div style="font-size:11px;color:var(--gray-500)">Registro gratuito</div></div>
-            <div class="plan-row-free">$0</div>
-          </div>
-          <div class="plan-row featured">
-            <div><div class="plan-row-name" style="color:var(--blue-800)">Premium ⭐</div><div style="font-size:11px;color:var(--blue-600)">Más visibilidad</div></div>
-            <div class="plan-row-price">$15/mes</div>
-          </div>
-          <div class="plan-row">
-            <div><div class="plan-row-name">Banner Ad</div><div style="font-size:11px;color:var(--gray-500)">Publicidad destacada</div></div>
-            <div class="plan-row-price">$30/sem</div>
-          </div>
-        </div>
+    <div class="side-stack">
+      <div class="box"><h3>Qué incluye tu registro</h3>
+        <div class="benefit"><svg class="ic"><use href="#i-check"/></svg>Perfil visible para clientes de Milagro</div>
+        <div class="benefit"><svg class="ic"><use href="#i-check"/></svg>Botones de llamada y WhatsApp directos</div>
+        <div class="benefit"><svg class="ic"><use href="#i-check"/></svg>Ubicación en el mapa</div>
+        <div class="benefit"><svg class="ic"><use href="#i-check"/></svg>Reseñas y valoraciones</div>
+        <div class="benefit"><svg class="ic"><use href="#i-check"/></svg>Aprobación en menos de 24 horas</div>
       </div>
-      <div class="info-card">
-        <div class="info-card-title">✅ ¿Qué incluye el registro?</div>
-        <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="display:flex;gap:10px;font-size:13px"><span style="color:var(--green);font-weight:700;font-size:16px">✓</span><span>Perfil visible para miles de usuarios en Milagro</span></div>
-          <div style="display:flex;gap:10px;font-size:13px"><span style="color:var(--green);font-weight:700;font-size:16px">✓</span><span>Botón de llamada y WhatsApp directo</span></div>
-          <div style="display:flex;gap:10px;font-size:13px"><span style="color:var(--green);font-weight:700;font-size:16px">✓</span><span>Ubicación en el mapa interactivo</span></div>
-          <div style="display:flex;gap:10px;font-size:13px"><span style="color:var(--green);font-weight:700;font-size:16px">✓</span><span>Sistema de reseñas y valoraciones</span></div>
-          <div style="display:flex;gap:10px;font-size:13px"><span style="color:var(--green);font-weight:700;font-size:16px">✓</span><span>Aprobación en menos de 24 horas</span></div>
-        </div>
-      </div>
-      <div class="info-card" style="background:var(--blue-900);border-color:var(--blue-800)">
-        <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:8px">📞 ¿Necesitas ayuda?</div>
-        <div style="font-size:12px;color:rgba(255,255,255,.65);line-height:1.6">Escríbenos por WhatsApp y te ayudamos a registrar tu negocio de forma gratuita.</div>
-        <button style="margin-top:12px;background:var(--blue-600);border:none;color:#fff;padding:9px 16px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;width:100%">💬 Contactar soporte</button>
-      </div>
+      <div class="box"><h3>¿Necesitas ayuda?</h3><p style="margin-bottom:14px">Escríbenos por WhatsApp y te ayudamos a registrar tu negocio gratis.</p><button class="btn btn-wa btn-block" data-toast="Demo: aquí se abriría el WhatsApp de soporte"><svg class="ic"><use href="#i-chat"/></svg>Contactar soporte</button></div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ════ ADMIN SCREEN ════ -->
-<div id="screen-admin" class="screen">
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:22px">
-    <div>
-      <h2 class="section-title">⚙️ Panel Administrador</h2>
-      <p style="color:var(--gray-500);font-size:13px">Bienvenido, Cristian — Milagro Conecta</p>
-    </div>
-    <div style="display:flex;gap:10px">
-      <button class="btn-primary" style="font-size:12px;padding:8px 16px">+ Agregar negocio</button>
-      <button style="padding:8px 16px;border:1px solid var(--gray-200);border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;background:var(--white);font-family:inherit">📊 Exportar</button>
-    </div>
+<!-- ═════ ADMIN ═════ -->
+<section id="screen-admin" class="screen">
+  <div class="sec-head" style="margin-top:6px"><div><h2>Panel administrador</h2><p>Bienvenido, Christian · cifras de ejemplo</p></div>
+    <button class="btn btn-ghost btn-sm" data-toast="Demo: aquí se exportaría a Excel">Exportar</button></div>
+  <div class="stats">
+    <div class="stat"><div class="lb">Negocios activos</div><div class="vl" id="stAct">248</div><div class="dl">+12 este mes</div></div>
+    <div class="stat"><div class="lb">Pendientes</div><div class="vl" id="stPen">3</div><div class="dl warn">Requieren revisión</div></div>
+    <div class="stat"><div class="lb">Usuarios hoy</div><div class="vl">3.412</div><div class="dl">+8% vs ayer</div></div>
+    <div class="stat"><div class="lb">Ingresos del mes</div><div class="vl">$1.660</div><div class="dl">+23% vs mes anterior</div></div>
   </div>
-  <div class="admin-grid">
-    <div class="stat-card">
-      <div class="stat-card-icon">🏪</div>
-      <div class="stat-card-num">248</div>
-      <div class="stat-card-label">Negocios activos</div>
-      <div class="stat-card-change">↑ +12 este mes</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-card-icon">⏳</div>
-      <div class="stat-card-num">12</div>
-      <div class="stat-card-label">Pendientes de aprobación</div>
-      <div class="stat-card-change" style="color:var(--amber)">● Requieren revisión</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-card-icon">👥</div>
-      <div class="stat-card-num">3,412</div>
-      <div class="stat-card-label">Usuarios activos hoy</div>
-      <div class="stat-card-change">↑ +8% vs ayer</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-card-icon">💰</div>
-      <div class="stat-card-num">$1,660</div>
-      <div class="stat-card-label">Ingresos del mes</div>
-      <div class="stat-card-change">↑ +23% vs mes anterior</div>
-    </div>
-  </div>
-  <div class="admin-layout">
-    <div>
-      <div class="admin-table-card" style="margin-bottom:20px">
-        <div class="admin-table-header">
-          <div class="admin-table-title">⏳ Negocios pendientes de aprobación</div>
-          <span class="badge-pending">12 pendientes</span>
-        </div>
-        <table>
-          <thead>
-            <tr><th>Negocio</th><th>Categoría</th><th>Dueño</th><th>Solicitado</th><th>Estado</th><th>Acciones</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Cafetería Milagro</strong></td>
-              <td>🍽️ Restaurante</td>
-              <td>Ana Mora</td>
-              <td>Hace 2h</td>
-              <td><span class="status-chip status-pending">Pendiente</span></td>
-              <td><div class="action-btns-table"><button class="btn-approve">✓ Aprobar</button><button class="btn-reject">✗</button></div></td>
-            </tr>
-            <tr>
-              <td><strong>Plomería 24h Milagro</strong></td>
-              <td>🔧 Servicios</td>
-              <td>Pedro Alvarado</td>
-              <td>Hace 5h</td>
-              <td><span class="status-chip status-pending">Pendiente</span></td>
-              <td><div class="action-btns-table"><button class="btn-approve">✓ Aprobar</button><button class="btn-reject">✗</button></div></td>
-            </tr>
-            <tr>
-              <td><strong>Taxi Don Pedro</strong></td>
-              <td>🚕 Transporte</td>
-              <td>Pedro García</td>
-              <td>Hace 1 día</td>
-              <td><span class="status-chip status-pending">Pendiente</span></td>
-              <td><div class="action-btns-table"><button class="btn-approve">✓ Aprobar</button><button class="btn-reject">✗</button></div></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="admin-table-card">
-        <div class="admin-table-header">
-          <div class="admin-table-title">🏪 Todos los negocios</div>
-          <div style="display:flex;gap:8px">
-            <input style="padding:5px 12px;border:1px solid var(--gray-200);border-radius:8px;font-size:12px;outline:none;font-family:inherit" placeholder="Buscar...">
-            <select style="padding:5px 12px;border:1px solid var(--gray-200);border-radius:8px;font-size:12px;font-family:inherit;outline:none">
-              <option>Todos</option><option>Activos</option><option>Premium</option>
-            </select>
-          </div>
-        </div>
-        <table>
-          <thead>
-            <tr><th>Negocio</th><th>Categoría</th><th>Plan</th><th>Visitas</th><th>Rating</th><th>Estado</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Pizza Milagro</strong></td>
-              <td>🍽️ Restaurante</td>
-              <td><span class="status-chip status-featured">⭐ Premium</span></td>
-              <td>1,204</td>
-              <td>⭐ 4.9</td>
-              <td><span class="status-chip status-active">Activo</span></td>
-            </tr>
-            <tr>
-              <td><strong>Farmacia Central</strong></td>
-              <td>💊 Farmacia</td>
-              <td><span class="status-chip status-featured">⭐ Premium</span></td>
-              <td>2,891</td>
-              <td>⭐ 4.5</td>
-              <td><span class="status-chip status-active">Activo</span></td>
-            </tr>
-            <tr>
-              <td><strong>Taxi Express</strong></td>
-              <td>🚕 Transporte</td>
-              <td><span style="font-size:10px;color:var(--gray-500)">Básico</span></td>
-              <td>634</td>
-              <td>⭐ 5.0</td>
-              <td><span class="status-chip status-active">Activo</span></td>
-            </tr>
-            <tr>
-              <td><strong>Spa Milagros</strong></td>
-              <td>💡 Emprendimiento</td>
-              <td><span style="font-size:10px;color:var(--gray-500)">Básico</span></td>
-              <td>187</td>
-              <td>⭐ 4.3</td>
-              <td><span class="status-chip status-active">Activo</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="admin-sidebar-col">
-      <div class="chart-card">
-        <div class="chart-card-title">📈 Visitas últimos 7 días</div>
-        <div class="bar-chart">
-          <div class="bar-item"><div class="bar" style="height:48px"></div><div class="bar-label">L</div></div>
-          <div class="bar-item"><div class="bar" style="height:62px"></div><div class="bar-label">M</div></div>
-          <div class="bar-item"><div class="bar" style="height:55px"></div><div class="bar-label">Mi</div></div>
-          <div class="bar-item"><div class="bar" style="height:80px"></div><div class="bar-label">J</div></div>
-          <div class="bar-item"><div class="bar" style="height:95px;background:var(--blue-500)"></div><div class="bar-label">V</div></div>
-          <div class="bar-item"><div class="bar" style="height:100px;background:var(--blue-600)"></div><div class="bar-label">S</div></div>
-          <div class="bar-item"><div class="bar" style="height:72px"></div><div class="bar-label">D</div></div>
-        </div>
-        <div style="margin-top:10px;font-size:11px;color:var(--gray-500)">Pico: Sábado — 3,412 visitas</div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-card-title">📂 Negocios por categoría</div>
-        <div class="top-cats">
-          <div class="top-cat-row"><div class="top-cat-icon">🛍️</div><span class="top-cat-name">Tiendas</span><div class="top-cat-bar-wrap"><div class="top-cat-bar" style="width:100%"></div></div><span class="top-cat-num">84</span></div>
-          <div class="top-cat-row"><div class="top-cat-icon">🍽️</div><span class="top-cat-name">Restaurantes</span><div class="top-cat-bar-wrap"><div class="top-cat-bar" style="width:74%"></div></div><span class="top-cat-num">62</span></div>
-          <div class="top-cat-row"><div class="top-cat-icon">🚕</div><span class="top-cat-name">Taxis</span><div class="top-cat-bar-wrap"><div class="top-cat-bar" style="width:54%"></div></div><span class="top-cat-num">45</span></div>
-          <div class="top-cat-row"><div class="top-cat-icon">💡</div><span class="top-cat-name">Emprendimientos</span><div class="top-cat-bar-wrap"><div class="top-cat-bar" style="width:46%"></div></div><span class="top-cat-num">39</span></div>
-          <div class="top-cat-row"><div class="top-cat-icon">💼</div><span class="top-cat-name">Profesionales</span><div class="top-cat-bar-wrap"><div class="top-cat-bar" style="width:37%"></div></div><span class="top-cat-num">31</span></div>
-        </div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-card-title">💰 Ingresos del mes</div>
-        <div style="font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:var(--blue-700)">$1,660</div>
-        <div style="font-size:11px;color:var(--green);font-weight:600;margin-bottom:14px">↑ +23% vs mes anterior</div>
-        <div style="display:flex;flex-direction:column;gap:8px">
-          <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--gray-500)">Planes Premium</span><span style="font-weight:700">$900</span></div>
-          <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--gray-500)">Publicidad</span><span style="font-weight:700">$480</span></div>
-          <div style="display:flex;justify-content:space-between;font-size:12px"><span style="color:var(--gray-500)">Planes anuales</span><span style="font-weight:700">$280</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
-</main>
+  <div class="box" style="margin-top:16px">
+    <h3>Negocios pendientes de aprobación</h3>
+    <div class="tbl-wrap"><table class="t"><thead><tr><th>Negocio</th><th>Categoría</th><th>Dueño</th><th>Solicitado</th><th>Acciones</th></tr></thead><tbody id="pendBody"></tbody></table></div>
+    <p id="pendEmpty" style="display:none;text-align:center;color:var(--ink-3);padding:16px">No hay solicitudes pendientes. 🎉</p>
+  </div>
+
+  <div class="adm-grid">
+    <div class="box"><h3>Todos los negocios</h3>
+      <div class="tbl-wrap"><table class="t"><thead><tr><th>Negocio</th><th>Plan</th><th>Visitas</th><th>Rating</th><th>Estado</th></tr></thead><tbody id="allBody"></tbody></table></div>
+    </div>
+    <div style="display:grid;gap:16px;align-content:start">
+      <div class="box"><h3>Visitas últimos 7 días</h3>
+        <div class="chart" id="chart"></div>
+        <p style="font-size:13px;color:var(--ink-3);margin-top:8px">Pico: sábado, 3.412 visitas</p></div>
+      <div class="box"><h3>Negocios por categoría</h3>
+        <div class="hbar"><div class="r"><span>🛍️ Tiendas</span><b>84</b></div><i><b style="width:100%"></b></i></div>
+        <div class="hbar"><div class="r"><span>🍽️ Restaurantes</span><b>62</b></div><i><b style="width:74%"></b></i></div>
+        <div class="hbar"><div class="r"><span>🚕 Taxis</span><b>45</b></div><i><b style="width:54%"></b></i></div>
+        <div class="hbar"><div class="r"><span>💡 Emprendimientos</span><b>39</b></div><i><b style="width:46%"></b></i></div>
+        <div class="hbar"><div class="r"><span>💼 Profesionales</span><b>31</b></div><i><b style="width:37%"></b></i></div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <footer>
-  Diseñado para <strong>Milagro, Ecuador</strong> · Prototipo HTML por <strong>ElhyCars Consultores</strong> · Cristian Sánchez · 2025
+  Hecho para <strong>Milagro, Ecuador</strong> · Prototipo por <strong>ElhyAi Consultores</strong> · Christian Sánchez · 2026
 </footer>
+</main>
+
+<nav class="tabs" aria-label="Navegación móvil">
+  <button data-go="home"><svg class="ic"><use href="#i-home"/></svg>Inicio</button>
+  <button data-go="mapa"><svg class="ic"><use href="#i-map"/></svg>Mapa</button>
+  <button data-go="perfil"><svg class="ic"><use href="#i-store"/></svg>Negocio</button>
+  <button data-go="registro"><svg class="ic"><use href="#i-plus"/></svg>Registrar</button>
+  <button data-go="admin"><svg class="ic"><use href="#i-shield"/></svg>Admin</button>
+</nav>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
-function showScreen(id) {
-  var screens = document.querySelectorAll('.screen');
-  for (var i = 0; i < screens.length; i++) {
-    screens[i].style.display = 'none';
-  }
-  var target = document.getElementById('screen-' + id);
-  if (target) target.style.display = 'block';
+(function(){
+'use strict';
+var CATS=[
+  {id:'all',name:'Todos',e:'✨'},{id:'rest',name:'Restaurantes',e:'🍽️'},{id:'farm',name:'Farmacias',e:'💊'},
+  {id:'taxi',name:'Taxis',e:'🚕'},{id:'tienda',name:'Tiendas',e:'🛍️'},{id:'prof',name:'Profesionales',e:'💼'},
+  {id:'transp',name:'Transporte',e:'🚌'},{id:'emp',name:'Emprendimientos',e:'💡'},{id:'tec',name:'Tecnología',e:'💻'},{id:'serv',name:'Servicios',e:'🔧'}
+];
+var TINT={rest:'#FFE9DD',farm:'#DDF3EA',taxi:'#FFF1C9',tienda:'#EADFFF',prof:'#DDE8FF',transp:'#DDF1FA',emp:'#FFE0EC',tec:'#DDEBFF',serv:'#EDEFF2'};
+// Datos de ejemplo (demo)
+var BIZ=[
+ {id:'pizza',name:'Pizza Milagro',cat:'rest',e:'🍕',desc:'Las mejores pizzas artesanales de la ciudad. Ingredientes frescos, masa madre hecha en casa y delivery toda la semana.',rating:4.9,rev:48,dist:300,open:true,state:'Abierto',badge:'destacado',addr:'Cdla. Kennedy, Calle 8va y Av. 17 de Septiembre',tel:'04-280-1234',wa:'+593 98 765 4321',mail:'contacto@ejemplo.com',tags:['🚚 Delivery','🥗 Vegetariano','🎂 Pedidos especiales','💳 Acepta tarjetas'],gallery:['🍕','🍝','🫓','🥗','🧃','🍰'],promo:{off:'20% OFF',txt:'En todas las pizzas los martes. Válido hasta el 31 de marzo.'},x:30,y:36,hours:[['Lunes – Viernes','08:00 – 22:00'],['Sábado','09:00 – 23:00'],['Domingo','10:00 – 21:00']],reviews:[['María González','Hace 2 días','Excelente servicio y la pizza llegó caliente a domicilio. La masa artesanal es increíble.'],['Carlos Andrade','Hace 5 días','Pedí para una reunión familiar y quedaron todos encantados. Precios accesibles y gran calidad.']],dist5:[40,6,2,0,0]},
+ {id:'farm',name:'Farmacia Central',cat:'farm',e:'💊',desc:'Atención las 24 horas. Medicamentos genéricos y de marca. Servicio a domicilio disponible en toda la ciudad.',rating:4.5,rev:92,dist:700,open:true,state:'Abierto 24 h',badge:'premium',addr:'Centro de Milagro (dirección de ejemplo)',tel:'04-280-5555',wa:'+593 99 111 2222',mail:'',tags:['🕐 24 horas','🚚 A domicilio','💳 Acepta tarjetas'],gallery:[],promo:{off:'Delivery',txt:'Servicio a domicilio disponible en toda la ciudad.'},x:50,y:50,hours:[['Todos los días','24 horas']],reviews:[],dist5:[]},
+ {id:'taxi',name:'Taxi Express Milagro',cat:'taxi',e:'🚕',desc:'Servicio de taxi seguro y puntual. Cobertura en toda la ciudad y cantones vecinos. Reserva por WhatsApp.',rating:5.0,rev:201,dist:1100,open:true,state:'Disponible',badge:'',addr:'Cobertura en toda la ciudad',tel:'',wa:'+593 98 333 4444',mail:'',tags:['📲 Reserva por WhatsApp','🌆 Cantones vecinos'],gallery:[],promo:null,x:72,y:30,hours:[['Lunes – Domingo','05:00 – 23:00']],reviews:[],dist5:[]},
+ {id:'spa',name:'Spa Milagros',cat:'emp',e:'🌸',desc:'Masajes, tratamientos faciales y corporales en ambientes relajantes. Precios accesibles para toda la familia.',rating:4.3,rev:17,dist:2400,open:false,state:'Cerrado',badge:'nuevo',addr:'Sector norte (dirección de ejemplo)',tel:'04-280-7777',wa:'',mail:'',tags:['💆 Masajes','🧖 Faciales'],gallery:[],promo:null,x:84,y:70,hours:[['Lunes – Sábado','10:00 – 19:00'],['Domingo','Cerrado']],reviews:[],dist5:[]},
+ {id:'juridico',name:'Estudio Jurídico Paz',cat:'prof',e:'⚖️',desc:'Asesoría legal en derecho civil, laboral y comercial. Primera consulta gratuita y 15 años de experiencia.',rating:4.8,rev:34,dist:1800,open:true,state:'Abierto',badge:'destacado',addr:'Centro de Milagro (dirección de ejemplo)',tel:'04-280-8888',wa:'+593 98 555 6666',mail:'',tags:['⚖️ Civil','👷 Laboral','🏢 Comercial'],gallery:[],promo:{off:'Gratis',txt:'Primera consulta sin costo.'},x:20,y:72,hours:[['Lunes – Viernes','09:00 – 18:00']],reviews:[],dist5:[]},
+ {id:'pollos',name:'Pollos Asados Don Marco',cat:'rest',e:'🍗',desc:'Pollos asados al carbón con papas y ensalada. Combos familiares y pedidos para eventos.',rating:4.4,rev:61,dist:950,open:true,state:'Abierto',badge:'',addr:'Av. Juan Montalvo (dirección de ejemplo)',tel:'04-280-9999',wa:'+593 98 777 8888',mail:'',tags:['🍗 Combos familiares','🚚 Delivery'],gallery:[],promo:null,x:42,y:18,hours:[['Todos los días','11:00 – 21:00']],reviews:[],dist5:[]},
+ {id:'tech',name:'TechMilagro',cat:'tec',e:'💻',desc:'Reparación de celulares, laptops y tablets. Venta de accesorios y soporte técnico para empresas.',rating:4.6,rev:56,dist:500,open:true,state:'Abierto',badge:'',addr:'Centro de Milagro (dirección de ejemplo)',tel:'04-280-3333',wa:'+593 99 444 5555',mail:'',tags:['📱 Celulares','💻 Laptops','🏢 Empresas'],gallery:[],promo:null,x:60,y:78,hours:[['Lunes – Sábado','09:00 – 19:00']],reviews:[],dist5:[]},
+ {id:'bazar',name:'Bazar La Económica',cat:'tienda',e:'🛍️',desc:'Útiles escolares, regalos y artículos para el hogar a buenos precios.',rating:4.2,rev:23,dist:650,open:true,state:'Abierto',badge:'nuevo',addr:'Centro de Milagro (dirección de ejemplo)',tel:'04-280-2222',wa:'',mail:'',tags:['🎁 Regalos','✏️ Útiles'],gallery:[],promo:null,x:12,y:30,hours:[['Lunes – Sábado','08:30 – 20:00']],reviews:[],dist5:[]},
+ {id:'electro',name:'Electricidad Rápida',cat:'serv',e:'🔧',desc:'Instalaciones y reparaciones eléctricas para hogares y negocios. Atención de emergencias.',rating:4.7,rev:19,dist:1500,open:true,state:'Disponible',badge:'',addr:'Atención a domicilio',tel:'',wa:'+593 98 222 3333',mail:'',tags:['⚡ Emergencias','🏠 A domicilio'],gallery:[],promo:null,x:90,y:20,hours:[['Lunes – Sábado','07:00 – 19:00']],reviews:[],dist5:[]}
+];
+var PENDING=[
+ {name:'Cafetería Milagro',cat:'🍽️ Restaurante',owner:'Ana Mora',when:'Hace 2 h'},
+ {name:'Plomería 24h Milagro',cat:'🔧 Servicios',owner:'Pedro Alvarado',when:'Hace 5 h'},
+ {name:'Taxi Don Pedro',cat:'🚕 Transporte',owner:'Pedro García',when:'Hace 1 día'}
+];
+var state={cat:'all',filter:'',q:'',current:'pizza',mapCat:'all'};
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function esc(t){var d=document.createElement('div');d.textContent=t==null?'':String(t);return d.innerHTML}
+function km(m){return m<1000?m+' m':(m/1000).toFixed(1).replace('.',',')+' km'}
+function ic(n,s){return '<svg class="ic"'+(s?' style="width:'+s+'px;height:'+s+'px"':'')+'><use href="#i-'+n+'"/></svg>'}
+function catOf(id){return CATS.filter(function(c){return c.id===id})[0]}
+function toast(m){var t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(function(){t.classList.remove('on')},2400)}
 
-  var navLinks = document.querySelectorAll('.nav-link');
-  for (var i = 0; i < navLinks.length; i++) navLinks[i].classList.remove('active');
-
-  var tabs = document.querySelectorAll('.tab');
-  for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
-
-  var order = ['home','mapa','perfil','registro','admin'];
-  var idx = order.indexOf(id);
-  if (idx >= 0) {
-    if (navLinks[idx]) navLinks[idx].classList.add('active');
-    if (tabs[idx]) tabs[idx].classList.add('active');
-  }
-}
-
-function filterCat(el) {
-  var cats = document.querySelectorAll('.cat-card');
-  for (var i = 0; i < cats.length; i++) cats[i].classList.remove('active');
-  el.classList.add('active');
-}
-
-function toggleFilter(el) {
-  var chips = el.closest('.filters-row') ? el.closest('.filters-row').querySelectorAll('.filter-chip') : document.querySelectorAll('.filter-chip');
-  chips.forEach(function(c){ c.classList.remove('active'); });
-  el.classList.add('active');
-}
-
-window.onload = function() {
-  // Show only home screen on load using display style
-  var screens = document.querySelectorAll('.screen');
-  for (var i = 0; i < screens.length; i++) {
-    screens[i].style.display = 'none';
-  }
-  var home = document.getElementById('screen-home');
-  if (home) home.style.display = 'block';
-
-  // Approve buttons
-  document.addEventListener('click', function(e) {
-    if (e.target.classList.contains('btn-approve')) {
-      var row = e.target.closest('tr');
-      if (row) {
-        row.style.opacity = '0';
-        row.style.transition = 'opacity .4s';
-        setTimeout(function(){ row.remove(); }, 400);
-      }
-    }
+/* Navegación */
+var SCREENS=['home','mapa','perfil','registro','admin'];
+function go(id,opts){
+  if(SCREENS.indexOf(id)<0)id='home';
+  $$('.screen').forEach(function(s){s.classList.toggle('on',s.id==='screen-'+id)});
+  $$('[data-go]').forEach(function(b){
+    if(b.closest('nav')){b.classList.toggle('on',b.getAttribute('data-go')===id)}
   });
-};
+  if(id==='perfil')renderProfile();
+  if(id==='mapa')renderMap();
+  if(!(opts&&opts.noHash)&&location.hash!=='#'+id)history.pushState(null,'','#'+id);
+  window.scrollTo({top:0,behavior:'auto'});
+  document.title=(id==='home'?'Milagro Conecta — Todos los negocios de Milagro':'Milagro Conecta · '+({mapa:'Mapa',perfil:'Negocio',registro:'Registrar negocio',admin:'Panel admin'}[id]));
+}
+document.addEventListener('click',function(e){
+  var g=e.target.closest('[data-go]');
+  if(g){e.preventDefault();go(g.getAttribute('data-go'));return}
+  var t=e.target.closest('[data-toast]');
+  if(t){toast(t.getAttribute('data-toast'))}
+});
+window.addEventListener('popstate',function(){go((location.hash||'#home').slice(1),{noHash:true})});
+
+/* Inicio */
+function renderCats(){
+  var html=CATS.map(function(c){return '<button class="cat'+(state.cat===c.id?' on':'')+'" role="tab" aria-selected="'+(state.cat===c.id)+'" data-cat="'+c.id+'"><span class="e">'+c.e+'</span>'+esc(c.name)+'</button>'}).join('');
+  $('#cats').innerHTML=html;
+}
+var FILTERS=[['best','⭐ Mejor valorados'],['near','📍 Más cercanos'],['new','🆕 Nuevos'],['open','🟢 Abiertos ahora']];
+function renderChips(){
+  $('#chips').innerHTML=FILTERS.map(function(f){return '<button class="chip'+(state.filter===f[0]?' on':'')+'" data-filter="'+f[0]+'">'+f[1]+'</button>'}).join('');
+}
+function badgeHtml(b){
+  if(b==='premium')return '<span class="badge prem">🥇 PREMIUM</span>';
+  if(b==='destacado')return '<span class="badge">⭐ DESTACADO</span>';
+  if(b==='nuevo')return '<span class="badge new">🆕 NUEVO</span>';
+  return '';
+}
+function cardHtml(b){
+  return '<article class="card" tabindex="0" data-open="'+b.id+'" aria-label="'+esc(b.name)+'">'+
+   '<div class="card-media" style="background:'+(TINT[b.cat]||'#EEF')+'">'+b.e+'<div class="badges">'+badgeHtml(b.badge)+'</div><span class="status'+(b.open?'':' off')+'">'+esc(b.state)+'</span></div>'+
+   '<div class="card-body"><div class="kicker">'+esc(catOf(b.cat).name)+'</div><h3>'+esc(b.name)+'</h3><p>'+esc(b.desc)+'</p>'+
+   '<div class="meta"><span class="rate">'+ic('star')+b.rating.toFixed(1).replace('.',',')+' <span style="color:var(--ink-3);font-weight:600">('+b.rev+')</span></span><span style="display:flex;gap:4px;align-items:center">'+ic('pin',15)+km(b.dist)+'</span></div>'+
+   '<div class="card-actions"><button class="btn btn-ghost btn-sm" data-act="call" data-id="'+b.id+'">'+ic('phone',16)+'Llamar</button><button class="btn btn-wa btn-sm" data-act="wa" data-id="'+b.id+'">'+ic('chat',16)+'WhatsApp</button></div></div></article>';
+}
+function filtered(){
+  var q=state.q.trim().toLowerCase();
+  var list=BIZ.filter(function(b){
+    if(state.cat!=='all'&&b.cat!==state.cat)return false;
+    if(state.filter==='open'&&!b.open)return false;
+    if(state.filter==='new'&&b.badge!=='nuevo')return false;
+    if(q){var hay=(b.name+' '+b.desc+' '+catOf(b.cat).name+' '+b.tags.join(' ')).toLowerCase();if(hay.indexOf(q)<0)return false}
+    return true;
+  });
+  if(state.filter==='best')list.sort(function(a,b){return b.rating-a.rating});
+  if(state.filter==='near')list.sort(function(a,b){return a.dist-b.dist});
+  return list;
+}
+function renderGrid(){
+  var list=filtered();
+  $('#res-title').textContent=state.q?'Resultados para “'+state.q.trim()+'”':(state.cat==='all'?'Negocios destacados':catOf(state.cat).name);
+  $('#res-count').textContent=list.length+(list.length===1?' negocio encontrado':' negocios encontrados');
+  $('#grid').innerHTML=list.length?list.map(cardHtml).join(''):
+   '<div class="empty"><div style="font-size:40px">🔎</div><b>Aún no hay negocios aquí</b>Prueba otra búsqueda o sé el primero en registrarte.<div style="margin-top:14px"><button class="btn btn-pri btn-sm" data-go="registro">Registrar mi negocio</button></div></div>';
+}
+document.addEventListener('click',function(e){
+  var c=e.target.closest('[data-cat]');
+  if(c&&c.closest('#cats')){state.cat=c.getAttribute('data-cat');renderCats();renderGrid();return}
+  var f=e.target.closest('[data-filter]');
+  if(f){var v=f.getAttribute('data-filter');state.filter=state.filter===v?'':v;renderChips();renderGrid();return}
+  var a=e.target.closest('[data-act]');
+  if(a){e.stopPropagation();var b=BIZ.filter(function(x){return x.id===a.getAttribute('data-id')})[0];
+    toast('Demo: aquí se '+(a.getAttribute('data-act')==='call'?'abriría la llamada a ':'abriría WhatsApp con ')+b.name);return}
+  var o=e.target.closest('[data-open]');
+  if(o){state.current=o.getAttribute('data-open');go('perfil')}
+});
+document.addEventListener('keydown',function(e){
+  if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('.card')){e.preventDefault();state.current=e.target.getAttribute('data-open');go('perfil')}
+});
+$('#searchForm').addEventListener('submit',function(e){e.preventDefault();state.q=$('#q').value;renderGrid();$('#results-top').scrollIntoView({behavior:'smooth',block:'start'})});
+$('#q').addEventListener('input',function(){state.q=this.value;renderGrid()});
+
+/* Mapa */
+function renderMap(){
+  var cats=CATS.filter(function(c){return c.id==='all'||BIZ.some(function(b){return b.cat===c.id})});
+  $('#mapCats').innerHTML=cats.map(function(c){return '<button class="cat'+(state.mapCat===c.id?' on':'')+'" data-mcat="'+c.id+'"><span class="e">'+c.e+'</span>'+esc(c.name)+'</button>'}).join('');
+  var list=BIZ.filter(function(b){return state.mapCat==='all'||b.cat===state.mapCat});
+  $('#pins').innerHTML=list.map(function(b){return '<button class="pin" style="left:'+b.x+'%;top:'+b.y+'%" data-pin="'+b.id+'" aria-label="'+esc(b.name)+'"><span class="bub"><i>'+b.e+'</i></span></button>'}).join('');
+  $('#mapList').innerHTML=list.map(function(b){return '<button class="list-item" data-pin="'+b.id+'"><span class="em" style="background:'+TINT[b.cat]+'">'+b.e+'</span><span><b>'+esc(b.name)+'</b><small>'+esc(catOf(b.cat).name)+' · '+km(b.dist)+' · ★ '+b.rating.toFixed(1).replace('.',',')+'</small></span></button>'}).join('');
+  $('#pop').classList.remove('on');
+}
+document.addEventListener('click',function(e){
+  var m=e.target.closest('[data-mcat]');
+  if(m){state.mapCat=m.getAttribute('data-mcat');renderMap();return}
+  var p=e.target.closest('[data-pin]');
+  if(p){
+    var id=p.getAttribute('data-pin'),b=BIZ.filter(function(x){return x.id===id})[0];
+    $$('.pin').forEach(function(n){n.classList.toggle('on',n.getAttribute('data-pin')===id)});
+    $$('.list-item').forEach(function(n){n.classList.toggle('on',n.getAttribute('data-pin')===id)});
+    var pop=$('#pop');
+    pop.innerHTML='<span class="em">'+b.e+'</span><div class="tx"><b>'+esc(b.name)+'</b><small>'+esc(catOf(b.cat).name)+' · '+km(b.dist)+' · ★ '+b.rating.toFixed(1).replace('.',',')+'</small></div><button class="btn btn-pri btn-sm" data-open-profile="'+b.id+'">Ver</button>';
+    pop.classList.add('on');
+    return;
+  }
+  var op=e.target.closest('[data-open-profile]');
+  if(op){state.current=op.getAttribute('data-open-profile');go('perfil')}
+});
+
+/* Perfil */
+function starsTxt(r){var n=Math.round(r);return '★★★★★'.slice(0,n)+'☆☆☆☆☆'.slice(0,5-n)}
+function renderProfile(){
+  var b=BIZ.filter(function(x){return x.id===state.current})[0]||BIZ[0];
+  var c=catOf(b.cat);
+  var gal=(b.gallery&&b.gallery.length?b.gallery:[b.e,b.e,b.e]);
+  var galHtml=gal.map(function(g){return '<div>'+g+'</div>'}).join('');
+  var total=b.dist5.reduce(function(a,x){return a+x},0)||1;
+  var rev=b.reviews.length?
+    '<div class="rev-sum"><div><div class="big">'+b.rating.toFixed(1).replace('.',',')+'</div><div class="stars">'+starsTxt(b.rating)+'</div><small style="color:var(--ink-3);font-weight:600">'+b.rev+' reseñas</small></div><div class="bars">'+
+      [5,4,3,2,1].map(function(s,i){return '<div class="bar">'+s+'★<i><b style="width:'+Math.round((b.dist5[i]||0)/total*100)+'%"></b></i>'+(b.dist5[i]||0)+'</div>'}).join('')+'</div></div>'+
+    b.reviews.map(function(r){return '<div class="rev"><div class="who"><span class="av">👤</span><div>'+esc(r[0])+'<br><small>'+esc(r[1])+'</small></div></div><div class="stars" style="font-size:13px">★★★★★</div><p style="margin-top:4px">'+esc(r[2])+'</p></div>'}).join('')
+    :'<p>Todavía no hay reseñas de ejemplo para este negocio. En la versión real, tus clientes podrán dejar la suya aquí.</p>';
+  var contact='';
+  if(b.tel)contact+='<div class="contact-row">'+ic('phone')+'Teléfono · <b>'+esc(b.tel)+'</b></div>';
+  if(b.wa)contact+='<div class="contact-row">'+ic('chat')+'WhatsApp · <b>'+esc(b.wa)+'</b></div>';
+  if(b.mail)contact+='<div class="contact-row">'+ic('mail')+esc(b.mail)+'</div>';
+  if(!contact)contact='<p>Contacto disponible por WhatsApp o teléfono en la versión real.</p>';
+  $('#profile').innerHTML=
+   '<div class="p-hero"><div class="p-cover" style="background:'+TINT[b.cat]+'">'+b.e+'<div class="badges">'+badgeHtml(b.badge)+'</div><span class="status'+(b.open?'':' off')+'">'+esc(b.state)+'</span></div>'+
+   '<div class="p-head"><div class="kicker">'+esc(c.name)+'</div><h1>'+esc(b.name)+'</h1>'+
+   '<div class="p-meta"><span style="color:var(--ink)">'+ic('star',16)+'<b>'+b.rating.toFixed(1).replace('.',',')+'</b> ('+b.rev+' reseñas)</span><span>'+ic('pin',16)+km(b.dist)+' de ti</span><span>'+ic('clock',16)+esc(b.state)+'</span></div>'+
+   '<div class="p-actions"><button class="btn btn-pri" data-toast="Demo: aquí se abriría la llamada a '+esc(b.name)+'">'+ic('phone')+'Llamar</button><button class="btn btn-wa" data-toast="Demo: aquí se abriría WhatsApp con '+esc(b.name)+'">'+ic('chat')+'WhatsApp</button></div></div></div>'+
+   '<div class="p-grid"><div style="display:grid;gap:16px;align-content:start">'+
+     '<div class="box"><h3>Descripción</h3><p>'+esc(b.desc)+'</p><div class="tags">'+b.tags.map(function(t){return '<span class="tag">'+esc(t)+'</span>'}).join('')+'</div></div>'+
+     '<div class="box"><h3>Galería</h3><div class="gallery">'+galHtml+'</div></div>'+
+     '<div class="box"><h3>Reseñas de clientes</h3>'+rev+'</div></div>'+
+   '<div style="display:grid;gap:16px;align-content:start">'+
+     '<div class="box"><h3>'+ic('pin',18)+'Dirección</h3><p>'+esc(b.addr)+'</p><div style="margin-top:12px"><button class="btn btn-ghost btn-sm" data-go="mapa">Ver en el mapa</button></div></div>'+
+     '<div class="box"><h3>'+ic('clock',18)+'Horarios</h3><table class="hours">'+b.hours.map(function(h){return '<tr><td>'+esc(h[0])+'</td><td>'+esc(h[1])+'</td></tr>'}).join('')+'</table></div>'+
+     '<div class="box"><h3>Contacto</h3>'+contact+'</div>'+
+     (b.promo?'<div class="promo"><div style="font-size:12px;font-weight:800;letter-spacing:.6px;margin-bottom:4px">🏷️ PROMOCIÓN ACTIVA</div><div class="off">'+esc(b.promo.off)+'</div><p style="color:#5a3d00;font-size:14px;margin-top:6px">'+esc(b.promo.txt)+'</p></div>':'')+
+   '</div></div>';
+}
+
+/* Registro */
+var REQ=['f-name','f-cat','f-desc','f-tel','f-dir'];
+function progress(){
+  var done=REQ.filter(function(id){return $('#'+id).value.trim()}).length+($('#f-terms').checked?1:0);
+  $('#prog').style.width=Math.round(done/(REQ.length+1)*100)+'%';
+}
+$$('#regForm input,#regForm select,#regForm textarea').forEach(function(el){el.addEventListener('input',progress);el.addEventListener('change',progress)});
+var drop=$('#drop'),files=$('#files');
+function setFiles(list){
+  var ok=Array.prototype.slice.call(list).filter(function(f){return /^image\/(png|jpeg)$/.test(f.type)&&f.size<=5*1024*1024}).slice(0,10);
+  var skipped=list.length-ok.length;
+  $('#dropTxt').textContent=ok.length?(ok.length+(ok.length===1?' foto seleccionada':' fotos seleccionadas')):'Arrastra tus fotos aquí o toca para subir';
+  if(skipped>0)toast('Algunas fotos no se agregaron (solo PNG/JPG hasta 5 MB, máximo 10).');
+}
+drop.addEventListener('click',function(){files.click()});
+drop.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();files.click()}});
+files.addEventListener('change',function(){setFiles(files.files)});
+['dragenter','dragover'].forEach(function(ev){drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.add('over')})});
+['dragleave','drop'].forEach(function(ev){drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.remove('over')})});
+drop.addEventListener('drop',function(e){setFiles(e.dataTransfer.files)});
+$('#regForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  var bad=null;
+  REQ.forEach(function(id){var el=$('#'+id),f=el.closest('.field'),ok=!!el.value.trim();f.classList.toggle('err',!ok);if(!ok&&!bad)bad=el});
+  var tf=$('#termsField');tf.classList.toggle('err',!$('#f-terms').checked);if(!$('#f-terms').checked&&!bad)bad=$('#f-terms');
+  if(bad){bad.focus();toast('Revisa los campos marcados en rojo');return}
+  $('#okName').textContent=$('#f-name').value.trim();
+  $('#regBox').style.display='none';$('#regOk').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+/* Admin */
+function renderAdmin(){
+  $('#pendBody').innerHTML=PENDING.map(function(p,i){return '<tr data-i="'+i+'"><td><b>'+esc(p.name)+'</b></td><td>'+esc(p.cat)+'</td><td>'+esc(p.owner)+'</td><td>'+esc(p.when)+'</td><td><div class="row-act"><button class="btn btn-pri btn-sm" data-ok="'+i+'">Aprobar</button><button class="btn btn-ghost btn-sm" aria-label="Rechazar" data-no="'+i+'">'+ic('x',16)+'</button></div></td></tr>'}).join('');
+  $('#pendEmpty').style.display=PENDING.length?'none':'block';
+  $('#stPen').textContent=PENDING.length;
+  var rows=BIZ.slice(0,5).map(function(b,i){var v=[1204,2891,634,187,420][i];return '<tr><td><b>'+esc(b.name)+'</b><br><small style="color:var(--ink-3)">'+esc(catOf(b.cat).name)+'</small></td><td>'+(b.badge==='premium'||b.badge==='destacado'?'<span class="st pen">⭐ Premium</span>':'Básico')+'</td><td>'+v.toLocaleString('es-EC')+'</td><td>★ '+b.rating.toFixed(1).replace('.',',')+'</td><td><span class="st act">Activo</span></td></tr>'}).join('');
+  $('#allBody').innerHTML=rows;
+}
+document.addEventListener('click',function(e){
+  var ok=e.target.closest('[data-ok]'),no=e.target.closest('[data-no]');
+  if(!ok&&!no)return;
+  var i=parseInt((ok||no).getAttribute(ok?'data-ok':'data-no'),10);
+  var p=PENDING.splice(i,1)[0];
+  if(ok){var n=parseInt($('#stAct').textContent,10)||0;$('#stAct').textContent=n+1;toast('✓ '+p.name+' aprobado (demo)')}
+  else toast(p.name+' rechazado (demo)');
+  renderAdmin();
+});
+var DAYS=[['L',38],['M',46],['Mi',52],['J',58],['V',74],['S',100],['D',64]];
+$('#chart').innerHTML=DAYS.map(function(d){return '<div'+(d[0]==='S'?' class="peak"':'')+'><i style="height:'+d[1]+'%"></i>'+d[0]+'</div>'}).join('');
+
+/* Inicio */
+renderCats();renderChips();renderGrid();renderAdmin();
+go((location.hash||'#home').slice(1),{noHash:true});
+})();
 </script>
 </body>
 </html>
